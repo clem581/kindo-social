@@ -49,6 +49,7 @@ async function main() {
   await rendern([storyFolie(s)], path.join(ordner, s.datum), SH);
   // Fester Name, damit Clemens am Handy immer denselben Link öffnen kann
   fs.copyFileSync(path.join(ordner, s.datum, '01.png'), path.join(ordner, 'heute.png'));
+  fs.writeFileSync(path.join(ordner, 'link.txt'), s.link + '\n');
 
   // Nur der aktuelle Tag bleibt liegen, damit das öffentliche Repo nicht mit alten Bildern wächst
   for (const f of fs.readdirSync(ordner)) {
@@ -64,6 +65,8 @@ async function main() {
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
 Nur das Bild (fester Link, öffnet im Browser statt in der GitHub-App): https://raw.githubusercontent.com/clem581/kindo-social/main/story/heute.png
+
+Nur der Sticker-Link (fester Link, zum Kopieren): https://raw.githubusercontent.com/clem581/kindo-social/main/story/link.txt
 `);
   const verlauf = path.join(ordner, 'verlauf.txt');
   // Eine Zeile je Tag; wird ein Tag neu erzeugt, ersetzt die neue Zeile die alte
