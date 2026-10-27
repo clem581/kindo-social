@@ -74,20 +74,25 @@ function titelFolie(b, hintergrund) {
 <div style="width: 120px; height: 120px; border-radius: 999px; background: #ffc93c; border: 6px solid ${INK}; display: flex; align-items: center; justify-content: center">${pfeil(64, 2.8)}</div></div></div>`;
 }
 
-function tippFolie(t, nr, von) {
+// Die Tipp-Karte (farbiger Streifen, Titel, Satz, Wann/Wo/Alter/Preis); kreis = Inhalt des gelben Kreises
+function tippKarte(t, kreis) {
   const preis = t.preis ? `<div style="display: flex; align-items: center"><div style="transform: rotate(-3deg); background: #ffc93c; border: 5px solid ${INK}; border-radius: 18px; padding: 10px 28px 6px; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 48px; line-height: 1.1">${esc(t.preis)}</div></div>` : '';
+  return `<div id="karte" style="flex-grow: 1; min-height: 0; display: flex; flex-direction: column; background: #ffffff; border: 6px solid ${INK}; border-radius: 48px; box-shadow: 12px 14px 0 rgba(0,0,0,.16); overflow: hidden">
+<div style="height: 280px; flex-shrink: 0; background: ${farbe(t.kategorie)}; border-bottom: 6px solid ${INK}; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 48px 40px; box-sizing: border-box">
+<div style="background: #ffffff; border: 5px solid ${INK}; border-radius: 999px; padding: 10px 30px; font-weight: 900; font-size: 38px">${esc(t.kategorie)}</div>
+<div style="width: 190px; height: 190px; border-radius: 999px; background: #ffc93c; border: 6px solid ${INK}; box-shadow: 8px 10px 0 rgba(0,0,0,.16); display: flex; align-items: center; justify-content: center; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 130px; line-height: 1; padding-top: 14px; box-sizing: border-box; transform: rotate(-6deg)">${kreis}</div></div>
+<div style="padding: 48px 48px 40px; display: flex; flex-direction: column; gap: 22px; flex-grow: 1">
+<h2 id="titel" style="margin: 0; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 104px; line-height: .98; letter-spacing: -2px">${esc(t.titel)}</h2>
+<p style="margin: 0; font-weight: 700; font-size: 38px; line-height: 1.3; color: #4a4a58">${esc(t.satz)}</p>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin-top: auto">
+${zeile(ICON_WANN, t.wann)}${zeile(ICON_WO, t.wo)}${zeile(ICON_ALTER, t.alter)}${preis}</div></div></div>`;
+}
+
+function tippFolie(t, nr, von) {
   return `<div id="folie" style="width: ${B}px; height: ${H}px; box-sizing: border-box; padding: 80px 84px; background: #fff6ea; display: flex; flex-direction: column; gap: 44px; font-family: 'Nunito', sans-serif; color: ${INK}; overflow: hidden">
 <div style="display: flex; justify-content: space-between; align-items: center">
 <div style="background: #ffffff; border: 5px solid ${INK}; border-radius: 999px; padding: 12px 30px; font-weight: 900; font-size: 36px">Tipp ${nr} von ${von}</div>${logo(false)}</div>
-<div id="karte" style="flex-grow: 1; min-height: 0; display: flex; flex-direction: column; background: #ffffff; border: 6px solid ${INK}; border-radius: 48px; box-shadow: 12px 14px 0 rgba(0,0,0,.16); overflow: hidden">
-<div style="height: 280px; flex-shrink: 0; background: ${farbe(t.kategorie)}; border-bottom: 6px solid ${INK}; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 48px 40px; box-sizing: border-box">
-<div style="background: #ffffff; border: 5px solid ${INK}; border-radius: 999px; padding: 10px 30px; font-weight: 900; font-size: 38px">${esc(t.kategorie)}</div>
-<div style="width: 190px; height: 190px; border-radius: 999px; background: #ffc93c; border: 6px solid ${INK}; box-shadow: 8px 10px 0 rgba(0,0,0,.16); display: flex; align-items: center; justify-content: center; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 130px; line-height: 1; padding-top: 14px; box-sizing: border-box; transform: rotate(-6deg)">${nr}</div></div>
-<div style="padding: 48px 48px 40px; display: flex; flex-direction: column; gap: 22px; flex-grow: 1">
-<h2 id="titel" style="margin: 0; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 104px; line-height: .98; letter-spacing: -2px; overflow-wrap: break-word">${esc(t.titel)}</h2>
-<p style="margin: 0; font-weight: 700; font-size: 38px; line-height: 1.3; color: #4a4a58">${esc(t.satz)}</p>
-<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin-top: auto">
-${zeile(ICON_WANN, t.wann)}${zeile(ICON_WO, t.wo)}${zeile(ICON_ALTER, t.alter)}${preis}</div></div></div>
+${tippKarte(t, nr)}
 <div style="display: flex; justify-content: center; align-items: center; gap: 14px; font-weight: 900; font-size: 36px"><span>Alle Details auf kindo.at</span>${pfeil(40, 2.8)}</div></div>`;
 }
 
@@ -152,14 +157,14 @@ async function main() {
 }
 
 // Jede Folie als PNG 01.png, 02.png … in den Ordner; bricht ab, wenn ein Text nicht passt.
-async function rendern(folien, ordner) {
+async function rendern(folien, ordner, hoehe = H) {
   fs.rmSync(ordner, { recursive: true, force: true });
   fs.mkdirSync(ordner, { recursive: true });
   // Die Seite muss neben fonts/ liegen, sonst lädt der Browser die Schriften nicht.
   const tmp = path.join(__dirname, '_bild.html');
   const browser = await chromium.launch();
   try {
-    const page = await browser.newPage({ viewport: { width: B, height: H } });
+    const page = await browser.newPage({ viewport: { width: B, height: hoehe } });
     for (const [i, html] of folien.entries()) {
       fs.writeFileSync(tmp, KOPF + html + FUSS);
       await page.goto('file:///' + tmp.replace(/\\/g, '/'));
@@ -176,7 +181,8 @@ async function rendern(folien, ordner) {
   }
 }
 
-// Bausteine für profil.js (Beiträge ohne Termine)
-module.exports = { B, H, INK, esc, farbe, logo, pfeil, schlussFolie, ICON_SPEICHERN, ICON_TEILEN, ICON_FOLGEN, rendern };
+// Bausteine für profil.js (Beiträge ohne Termine) und story.js (Tipp des Tages)
+module.exports = { B, H, INK, esc, farbe, logo, pfeil, schlussFolie, ICON_SPEICHERN, ICON_TEILEN, ICON_FOLGEN, rendern,
+  tippKarte, TITELFARBEN, titelschrift };
 
 if (require.main === module) main().catch(e => { console.error(e.message); process.exit(1); });

@@ -39,6 +39,18 @@ Gleich wie oben, mit drei Unterschieden:
   Titel- und Schlussbild sagen dann „diese Woche“ statt „Wochenende“.
 - `datum` nennt Dienstag bis Freitag, z. B. `"3. – 6.11."`.
 
+## Täglich: Story „Tipp des Tages“
+
+Eine Veranstaltung für heute als Story-Bild (1080 × 1920). Clemens postet sie selbst in der
+Instagram-App – so zählt sie nicht zum Metricool-Kontingent und kann einen Link-Sticker bekommen.
+
+- `node termine.js heute` listet die Termine von heute (ein einziger Abruf).
+- Eine Datei `story/<heute>.json` anlegen: `datum` (`"2026-10-28"`), `tipp` (Felder wie oben) und
+  `link` (die Seite der Veranstaltung auf kindo.at).
+- `node story.js story/<heute>.json` – das Bild landet in `story/<heute>/01.png`, dazu `story/README.md`
+  mit Bild und Link. Ältere Tage werden gelöscht, `story/verlauf.txt` merkt sich, was schon dran war.
+- Am Handy: https://github.com/clem581/kindo-social/tree/main/story – Bild speichern, Link kopieren.
+
 Einmalig nach dem Klonen: `npm ci`.
 
 Schriften: Baloo 2 und Nunito, beide unter der SIL Open Font License.

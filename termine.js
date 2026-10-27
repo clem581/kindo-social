@@ -3,6 +3,7 @@
 //         node termine.js woche    →  ab morgen bis Freitag, je Tag 1 Abruf mit Pause
 //                                     (die Wochen-Liste von kindo.at zeigt nur rund 300 Karten
 //                                     und reicht an einem Montag oft nicht bis Freitag)
+//         node termine.js heute    →  nur heute (1 Abruf), für die Story „Tipp des Tages“
 // Ausgabe: eine Zeile je Termin: id | Tag Datum Monat Kategorie Alter Bezirk Titel Zeit Ort Preis …
 const BASIS = 'https://www.kindo.at';
 
@@ -40,8 +41,9 @@ async function liste(url) {
 }
 
 (async () => {
-  const urls = process.argv[2] === 'woche'
-    ? wochentage().map(t => `${BASIS}/veranstaltungen?zeitraum=tag&tag=${t}`)
+  const heute = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Vienna' });
+  const urls = process.argv[2] === 'woche' ? wochentage().map(t => `${BASIS}/veranstaltungen?zeitraum=tag&tag=${t}`)
+    : process.argv[2] === 'heute' ? [`${BASIS}/veranstaltungen?zeitraum=tag&tag=${heute}`]
     : [`${BASIS}/veranstaltungen/wochenende`];
   let n = 0;
   for (const [i, url] of urls.entries()) {
