@@ -21,6 +21,15 @@ const FARBEN = {
   Musik: '#7cc552', Kino: '#2f9ae0', Sport: '#7cc552', Lesen: '#4bc0b8', Ausflug: '#7cc552', Zaubern: '#2f9ae0',
 };
 const farbe = k => FARBEN[k] || '#e8654f';
+// Das Titelbild wechselt reihum die Farbe: Montag, Wochenende, nächster Montag … nie zweimal hintereinander gleich.
+// Das Datum kommt aus dem Dateinamen (woche-<Montag> bzw. <Samstag>); ohne Datum bleibt es blau.
+const TITELFARBEN = ['#2f9ae0', '#e8654f', '#a78be0'];
+function titelfarbe(quelle, art) {
+  const d = path.basename(quelle).match(/\d{4}-\d{2}-\d{2}/);
+  if (!d) return TITELFARBEN[0];
+  const woche = Math.floor((Date.parse(d[0]) / 864e5 + 3) / 7); // Wochen seit 1970, ab Montag gezählt
+  return TITELFARBEN[(woche * 2 + (art === 'woche' ? 0 : 1)) % TITELFARBEN.length];
+}
 // Was sich zwischen Wochenend- und Wochen-Beitrag unterscheidet
 const TEXTE = {
   wochenende: { kopf: 'Wochenend-Tipps für Wien', frage: 'Was machen wir am Wochenende?', mehr: 'Noch mehr fürs Wochenende?', merken: 'am Samstag wiederfinden' },
@@ -43,11 +52,11 @@ const ICON_WO = '<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 2
 const ICON_ALTER = '<circle cx="9" cy="7" r="3"></circle><path d="M3 21v-1a6 6 0 0 1 12 0v1"></path><circle cx="17.5" cy="10" r="2.2"></circle><path d="M16 21v-1a4 4 0 0 1 5.5-3.7"></path>';
 const zeile = (d, text) => `<div style="display: flex; align-items: center; gap: 18px; font-weight: 800; font-size: 36px; line-height: 1.15">${icon(d)}<span>${esc(text)}</span></div>`;
 
-function titelFolie(b) {
+function titelFolie(b, hintergrund) {
   const kats = [...new Set(b.tipps.map(t => t.kategorie))].slice(0, 4);
   const drehung = [-3, 2, -2, 3];
-  const chips = kats.map((k, i) => `<div style="transform: rotate(${drehung[i]}deg); background: ${farbe(k)}; border: 6px solid ${INK}; border-radius: 999px; padding: 14px 34px; font-weight: 900; font-size: 40px; box-shadow: 8px 10px 0 rgba(0,0,0,.16)">${esc(k)}</div>`).join('');
-  return `<div id="folie" style="width: ${B}px; height: ${H}px; box-sizing: border-box; padding: 88px 84px; background: #2f9ae0; display: flex; flex-direction: column; justify-content: space-between; font-family: 'Nunito', sans-serif; color: ${INK}; overflow: hidden">
+  const chips = kats.map((k, i) => `<div style="transform: rotate(${drehung[i]}deg); background: ${farbe(k) === hintergrund ? '#ffffff' : farbe(k)}; border: 6px solid ${INK}; border-radius: 999px; padding: 14px 34px; font-weight: 900; font-size: 40px; box-shadow: 8px 10px 0 rgba(0,0,0,.16)">${esc(k)}</div>`).join('');
+  return `<div id="folie" style="width: ${B}px; height: ${H}px; box-sizing: border-box; padding: 88px 84px; background: ${hintergrund}; display: flex; flex-direction: column; justify-content: space-between; font-family: 'Nunito', sans-serif; color: ${INK}; overflow: hidden">
 <div style="display: flex; justify-content: space-between; align-items: center">${logo(true)}
 <div style="transform: rotate(4deg); background: #ffc93c; border: 6px solid ${INK}; border-radius: 28px; padding: 18px 32px 12px; box-shadow: 10px 12px 0 rgba(0,0,0,.16); font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 46px; line-height: 1">${esc(b.datum)}</div></div>
 <div style="display: flex; flex-direction: column; gap: 22px">
@@ -133,7 +142,7 @@ async function main() {
   const b = JSON.parse(fs.readFileSync(quelle, 'utf8').replace(/^﻿/, ''));
   pruefen(b);
   const t = TEXTE[b.art];
-  const folien = [titelFolie(b), ...b.tipps.map((tipp, i) => tippFolie(tipp, i + 1, b.tipps.length)),
+  const folien = [titelFolie(b, titelfarbe(quelle, b.art)),...b.tipps.map((tipp, i) => tippFolie(tipp, i + 1, b.tipps.length)),
     schlussFolie({ mehr: t.mehr, zeile: 'Alle Termine in Wien – mit Filter nach Alter und Bezirk', kacheln: standardKacheln(t.merken) })];
   await rendern(folien, quelle.replace(/\.json$/, ''));
 }
