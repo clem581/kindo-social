@@ -18,7 +18,7 @@ const B = 1080, H = 1350;
 const INK = '#2a2a3a';
 const FARBEN = {
   Basteln: '#f58fb0', Theater: '#a78be0', 'Draußen': '#7cc552', Museum: '#4bc0b8', Feste: '#e8654f',
-  Musik: '#a78be0', Kino: '#2f9ae0', Sport: '#7cc552', Lesen: '#4bc0b8', Ausflug: '#7cc552', Zaubern: '#2f9ae0',
+  Musik: '#7cc552', Kino: '#2f9ae0', Sport: '#7cc552', Lesen: '#4bc0b8', Ausflug: '#7cc552', Zaubern: '#2f9ae0',
 };
 const farbe = k => FARBEN[k] || '#e8654f';
 // Was sich zwischen Wochenend- und Wochen-Beitrag unterscheidet
