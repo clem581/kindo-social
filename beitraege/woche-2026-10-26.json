@@ -1,0 +1,11 @@
+{
+  "art": "woche",
+  "datum": "28. – 30.10.",
+  "tipps": [
+    { "kategorie": "Lesen", "titel": "80 Jahre Sven Nordqvist!", "satz": "Geburtstagsfeier für Kinder in der Kinder- und Jugendbuchhandlung Lesewelt.", "wann": "Mi, 14 Uhr", "wo": "Lesewelt, 8. Bezirk", "alter": "4–13 Jahre", "preis": "gratis" },
+    { "kategorie": "Theater", "titel": "Gratis Kasperl im huma eleven", "satz": "Kostenloses Kasperltheater für Kinder im Einkaufszentrum.", "wann": "Mi, 15 Uhr", "wo": "huma eleven, 11. Bezirk", "alter": "bis 9 Jahre", "preis": "gratis" },
+    { "kategorie": "Museum", "titel": "Kinder-Vernissage in der Albertina", "satz": "Mitmachführung zu den Künstlerinnen der Albertina.", "wann": "Do, 16:30 Uhr", "wo": "Albertina, 1. Bezirk", "alter": "5–13 Jahre", "preis": "gratis" },
+    { "kategorie": "Basteln", "titel": "Halloween-Kreativwerkstatt", "satz": "Basteln für Kinder in WIEN MITTE The Mall.", "wann": "Fr, 14 Uhr", "wo": "Wien Mitte, 3. Bezirk", "alter": "4–12 Jahre", "preis": "gratis" },
+    { "kategorie": "Feste", "titel": "Erntedankfest Ottakring", "satz": "Herbstfest für Kinder und Familien bei der U-Bahn-Station Ottakring.", "wann": "Fr, 14 Uhr", "wo": "U-Bahn Ottakring, 16. Bezirk", "alter": "alle Alter", "preis": "Eintritt frei" }
+  ]
+}
