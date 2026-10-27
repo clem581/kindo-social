@@ -23,6 +23,15 @@ https://claude.ai/artifact/Ecvhsn4f6gb8cx7UUdaA8v
 
 Passt ein Text nicht aufs Bild, bricht `bild.js` mit einer Meldung ab.
 
+## Montags: Tipps für die Woche
+
+Gleich wie oben, mit drei Unterschieden:
+
+- `node termine.js woche` listet die Termine von morgen bis Freitag (je Tag ein Abruf, 2 Sekunden Pause).
+- Die Datei heißt `beitraege/woche-<Montag>.json` und hat zusätzlich `"art": "woche"` –
+  Titel- und Schlussbild sagen dann „diese Woche“ statt „Wochenende“.
+- `datum` nennt Dienstag bis Freitag, z. B. `"3. – 6.11."`.
+
 Einmalig nach dem Klonen: `npm ci`.
 
 Schriften: Baloo 2 und Nunito, beide unter der SIL Open Font License.

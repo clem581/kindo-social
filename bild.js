@@ -9,6 +9,7 @@
 //                "satz": "Ein Satz, was die Kinder dort machen.", "wann": "Sa, 14 Uhr",
 //                "wo": "Prater, 2. Bezirk", "alter": "alle Alter", "preis": "gratis" }, … ] }
 // 3 bis 5 Tipps. "preis" darf fehlen. Kategorien mit eigener Farbe: siehe FARBEN.
+// "art": "woche" macht den Montags-Beitrag (Tipps für die Woche), sonst Wochenende.
 const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
@@ -20,6 +21,11 @@ const FARBEN = {
   Musik: '#a78be0', Kino: '#2f9ae0', Sport: '#7cc552', Lesen: '#4bc0b8', Ausflug: '#7cc552', Zaubern: '#2f9ae0',
 };
 const farbe = k => FARBEN[k] || '#e8654f';
+// Was sich zwischen Wochenend- und Wochen-Beitrag unterscheidet
+const TEXTE = {
+  wochenende: { kopf: 'Wochenend-Tipps für Wien', frage: 'Was machen wir am Wochenende?', mehr: 'Noch mehr fürs Wochenende?', merken: 'am Samstag wiederfinden' },
+  woche: { kopf: 'Wochen-Tipps für Wien', frage: 'Was machen wir diese Woche?', mehr: 'Noch mehr für diese Woche?', merken: 'für den Nachmittag merken' },
+};
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 const KOPF = `<!doctype html><html lang="de"><head><meta charset="utf-8"><style>
@@ -45,8 +51,8 @@ function titelFolie(b) {
 <div style="display: flex; justify-content: space-between; align-items: center">${logo(true)}
 <div style="transform: rotate(4deg); background: #ffc93c; border: 6px solid ${INK}; border-radius: 28px; padding: 18px 32px 12px; box-shadow: 10px 12px 0 rgba(0,0,0,.16); font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 46px; line-height: 1">${esc(b.datum)}</div></div>
 <div style="display: flex; flex-direction: column; gap: 22px">
-<div style="font-weight: 900; font-size: 40px; letter-spacing: 3px; text-transform: uppercase; color: #ffffff">Wochenend-Tipps für Wien</div>
-<h1 style="margin: 0; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 150px; line-height: .95; letter-spacing: -3px; color: #ffffff">Was machen wir am Wochenende?</h1>
+<div style="font-weight: 900; font-size: 40px; letter-spacing: 3px; text-transform: uppercase; color: #ffffff">${TEXTE[b.art].kopf}</div>
+<h1 style="margin: 0; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 150px; line-height: .95; letter-spacing: -3px; color: #ffffff">${TEXTE[b.art].frage}</h1>
 <div style="display: flex; flex-wrap: wrap; gap: 22px; margin-top: 26px">${chips}</div></div>
 <div style="display: flex; justify-content: space-between; align-items: center; background: #ffffff; border: 6px solid ${INK}; border-radius: 44px; padding: 30px 30px 30px 48px; box-shadow: 10px 12px 0 rgba(0,0,0,.16)">
 <div style="display: flex; flex-direction: column; gap: 4px">
@@ -72,7 +78,7 @@ ${zeile(ICON_WANN, t.wann)}${zeile(ICON_WO, t.wo)}${zeile(ICON_ALTER, t.alter)}$
 <div style="display: flex; justify-content: center; align-items: center; gap: 14px; font-weight: 900; font-size: 36px"><span>Alle Details auf kindo.at</span>${pfeil(40, 2.8)}</div></div>`;
 }
 
-function schlussFolie() {
+function schlussFolie(b) {
   const kachel = (d, titel, text) => `<div style="background: #ffffff; border: 5px solid ${INK}; border-radius: 34px; padding: 30px 24px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; box-shadow: 8px 10px 0 rgba(0,0,0,.14)">
 <svg aria-hidden="true" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="${INK}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>
 <div style="font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 44px; line-height: 1">${titel}</div>
@@ -80,17 +86,19 @@ function schlussFolie() {
   return `<div id="folie" style="width: ${B}px; height: ${H}px; box-sizing: border-box; padding: 88px 84px; background: #ffc93c; display: flex; flex-direction: column; justify-content: space-between; align-items: center; font-family: 'Nunito', sans-serif; color: ${INK}; overflow: hidden">
 ${logo(true)}
 <div style="display: flex; flex-direction: column; align-items: center; gap: 40px">
-<h2 style="margin: 0; text-align: center; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 120px; line-height: .98; letter-spacing: -2px">Noch mehr fürs Wochenende?</h2>
+<h2 style="margin: 0; text-align: center; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 120px; line-height: .98; letter-spacing: -2px">${TEXTE[b.art].mehr}</h2>
 <div style="transform: rotate(-3deg); background: #ffffff; border: 7px solid ${INK}; border-radius: 40px; padding: 26px 64px 16px; box-shadow: 12px 14px 0 rgba(0,0,0,.18); font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 150px; line-height: 1; letter-spacing: -3px; color: #1477b8">kindo.at</div>
 <div style="font-weight: 800; font-size: 38px; text-align: center">Alle Termine in Wien – mit Filter nach Alter und Bezirk</div></div>
 <div style="width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
-${kachel('<path d="M6 3h12v18l-6-4-6 4z"></path>', 'Speichern', 'am Samstag wiederfinden')}
+${kachel('<path d="M6 3h12v18l-6-4-6 4z"></path>', 'Speichern', TEXTE[b.art].merken)}
 ${kachel('<path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"></path>', 'Teilen', 'gemeinsam planen')}
-${kachel('<circle cx="9" cy="8" r="4"></circle><path d="M2 21a7 7 0 0 1 14 0M19 8v6M16 11h6"></path>', 'Folgen', 'jeden Donnerstag neue Tipps')}</div></div>`;
+${kachel('<circle cx="9" cy="8" r="4"></circle><path d="M2 21a7 7 0 0 1 14 0M19 8v6M16 11h6"></path>', 'Folgen', 'jeden Montag und Donnerstag neue Tipps')}</div></div>`;
 }
 
 function pruefen(b) {
   if (!b.datum || !Array.isArray(b.tipps)) throw new Error('datum und tipps fehlen');
+  b.art = b.art || 'wochenende';
+  if (!TEXTE[b.art]) throw new Error(`art muss "wochenende" oder "woche" sein, nicht "${b.art}"`);
   if (b.tipps.length < 3 || b.tipps.length > 5) throw new Error('3 bis 5 Tipps nötig');
   b.tipps.forEach((t, i) => {
     for (const f of ['kategorie', 'titel', 'satz', 'wann', 'wo', 'alter']) if (!t[f]) throw new Error(`Tipp ${i + 1}: ${f} fehlt`);
@@ -112,9 +120,10 @@ function einpassen() {
 async function main() {
   const quelle = process.argv[2];
   if (!quelle) throw new Error('Aufruf: node bild.js beitraege/<datum>.json');
-  const b = JSON.parse(fs.readFileSync(quelle, 'utf8'));
+  // Ohne BOM: PowerShell schreibt UTF-8-Dateien mit einem unsichtbaren Zeichen davor
+  const b = JSON.parse(fs.readFileSync(quelle, 'utf8').replace(/^﻿/, ''));
   pruefen(b);
-  const folien = [titelFolie(b), ...b.tipps.map((t, i) => tippFolie(t, i + 1, b.tipps.length)), schlussFolie()];
+  const folien = [titelFolie(b), ...b.tipps.map((t, i) => tippFolie(t, i + 1, b.tipps.length)), schlussFolie(b)];
 
   const ordner = quelle.replace(/\.json$/, '');
   fs.rmSync(ordner, { recursive: true, force: true });
