@@ -21,9 +21,13 @@ const FARBEN = {
   Musik: '#7cc552', Kino: '#2f9ae0', Sport: '#7cc552', Lesen: '#4bc0b8', Ausflug: '#7cc552', Zaubern: '#2f9ae0',
 };
 const farbe = k => FARBEN[k] || '#e8654f';
-// Das Titelbild wechselt reihum die Farbe: Montag, Wochenende, nächster Montag … nie zweimal hintereinander gleich.
+// Das Titelbild wechselt reihum die Farbe: Montag, Wochenende, nächster Montag … nie zweimal hintereinander gleich,
+// erst nach 7 Beiträgen wieder dieselbe – im Profil ein bunter Mix aller KinDo-Farben.
 // Das Datum kommt aus dem Dateinamen (woche-<Montag> bzw. <Samstag>); ohne Datum bleibt es blau.
-const TITELFARBEN = ['#2f9ae0', '#e8654f', '#a78be0'];
+// Reihenfolge so, dass Nachbarn sich deutlich unterscheiden: blau, rot, grün, lila, gelb, türkis, rosa.
+const TITELFARBEN = ['#2f9ae0', '#e8654f', '#7cc552', '#a78be0', '#ffc93c', '#4bc0b8', '#f58fb0'];
+// Auf Blau und Rot weiße Schrift, auf den hellen Farben dunkle (weiß wäre dort schlecht lesbar)
+const titelschrift = grund => ['#2f9ae0', '#e8654f'].includes(grund) ? '#ffffff' : INK;
 function titelfarbe(quelle, art) {
   const d = path.basename(quelle).match(/\d{4}-\d{2}-\d{2}/);
   if (!d) return TITELFARBEN[0];
@@ -58,10 +62,10 @@ function titelFolie(b, hintergrund) {
   const chips = kats.map((k, i) => `<div style="transform: rotate(${drehung[i]}deg); background: ${farbe(k) === hintergrund ? '#ffffff' : farbe(k)}; border: 6px solid ${INK}; border-radius: 999px; padding: 14px 34px; font-weight: 900; font-size: 40px; box-shadow: 8px 10px 0 rgba(0,0,0,.16)">${esc(k)}</div>`).join('');
   return `<div id="folie" style="width: ${B}px; height: ${H}px; box-sizing: border-box; padding: 88px 84px; background: ${hintergrund}; display: flex; flex-direction: column; justify-content: space-between; font-family: 'Nunito', sans-serif; color: ${INK}; overflow: hidden">
 <div style="display: flex; justify-content: space-between; align-items: center">${logo(true)}
-<div style="transform: rotate(4deg); background: #ffc93c; border: 6px solid ${INK}; border-radius: 28px; padding: 18px 32px 12px; box-shadow: 10px 12px 0 rgba(0,0,0,.16); font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 46px; line-height: 1">${esc(b.datum)}</div></div>
+<div style="transform: rotate(4deg); background: ${hintergrund === '#ffc93c' ? '#ffffff' : '#ffc93c'}; border: 6px solid ${INK}; border-radius: 28px; padding: 18px 32px 12px; box-shadow: 10px 12px 0 rgba(0,0,0,.16); font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 46px; line-height: 1">${esc(b.datum)}</div></div>
 <div style="display: flex; flex-direction: column; gap: 22px">
-<div style="font-weight: 900; font-size: 40px; letter-spacing: 3px; text-transform: uppercase; color: #ffffff">${TEXTE[b.art].kopf}</div>
-<h1 style="margin: 0; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 150px; line-height: .95; letter-spacing: -3px; color: #ffffff">${TEXTE[b.art].frage}</h1>
+<div style="font-weight: 900; font-size: 40px; letter-spacing: 3px; text-transform: uppercase; color: ${titelschrift(hintergrund)}">${TEXTE[b.art].kopf}</div>
+<h1 style="margin: 0; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 150px; line-height: .95; letter-spacing: -3px; color: ${titelschrift(hintergrund)}">${TEXTE[b.art].frage}</h1>
 <div style="display: flex; flex-wrap: wrap; gap: 22px; margin-top: 26px">${chips}</div></div>
 <div style="display: flex; justify-content: space-between; align-items: center; background: #ffffff; border: 6px solid ${INK}; border-radius: 44px; padding: 30px 30px 30px 48px; box-shadow: 10px 12px 0 rgba(0,0,0,.16)">
 <div style="display: flex; flex-direction: column; gap: 4px">
