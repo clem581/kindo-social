@@ -1,12 +1,10 @@
 {
-  "titel": "Halloween-Wochenende in Wien",
-  "datum": "Sa 31.10. & So 1.11.",
-  "eintraege": [
-    { "tag": "Sa", "titel": "Halloween-Familienfest im Wurstelprater", "info": "14 Uhr · gratis" },
-    { "tag": "Sa", "titel": "Süßigkeitenjagd am Neubau (7.)", "info": "15 Uhr · gratis · 3–12 J." },
-    { "tag": "Sa", "titel": "Praterkasperl: Süßes oder Saures", "info": "15 & 16 Uhr · 5,90 € · 3–10 J." },
-    { "tag": "Sa", "titel": "Halloween-Umzug in der Seestadt", "info": "17 Uhr · gratis · 4–10 J." },
-    { "tag": "So", "titel": "Magie für Kids: Spooky Doo", "info": "10 Uhr · Magic World im Prater · 2–8 J." },
-    { "tag": "So", "titel": "Familiensonntag im KunstHausWien", "info": "10:30 Uhr · Kinder 6 € · 4–10 J." }
+  "datum": "31.10. – 1.11.",
+  "tipps": [
+    { "kategorie": "Feste", "titel": "Halloween-Fest im Wurstelprater", "satz": "Kostenloses Nachmittagsprogramm für Kinder und Familien beim Riesenrad.", "wann": "Sa, 14 Uhr", "wo": "Prater, 2. Bezirk", "alter": "alle Alter", "preis": "gratis" },
+    { "kategorie": "Draußen", "titel": "Halloween-Umzug in der Seestadt", "satz": "Kostenloser Laternenumzug durch die Seestadt Aspern.", "wann": "Sa, 17 Uhr", "wo": "Seestadt, 22. Bezirk", "alter": "4–10 Jahre", "preis": "gratis" },
+    { "kategorie": "Theater", "titel": "Praterkasperl: Süßes oder Saures", "satz": "Halloween-Kasperltheater beim Original Wiener Praterkasperl.", "wann": "Sa, 15 & 16 Uhr", "wo": "Prater, 2. Bezirk", "alter": "3–10 Jahre", "preis": "5,90 €" },
+    { "kategorie": "Zaubern", "titel": "Magie für Kids: Spooky Doo", "satz": "Mitmach-Zaubershow für Kinder in der Magic World im Prater.", "wann": "So, 10 Uhr", "wo": "Prater, 2. Bezirk", "alter": "2–8 Jahre" },
+    { "kategorie": "Basteln", "titel": "Familiensonntag im KunstHausWien", "satz": "Kreative Rätselreise für Kinder durchs Museum Hundertwasser.", "wann": "So, 10:30 Uhr", "wo": "KunstHausWien, 3. Bezirk", "alter": "4–10 Jahre", "preis": "Kinder 6 €" }
   ]
 }
