@@ -10,7 +10,7 @@
 //   "link": "https://www.kindo.at/veranstaltungen/264783" }
 const fs = require('fs');
 const path = require('path');
-const { B, INK, esc, logo, pfeil, rendern, tippKarte, TITELFARBEN, titelschrift } = require('./bild');
+const { B, INK, esc, farbe, logo, pfeil, rendern, tippKarte, TITELFARBEN, titelschrift } = require('./bild');
 
 const SH = 1920;
 const TAGE = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
@@ -18,7 +18,9 @@ const STERN = `<svg aria-hidden="true" width="110" height="110" viewBox="0 0 24 
 
 function storyFolie(s) {
   const tag = Date.parse(s.datum) / 864e5;
-  const grund = TITELFARBEN[tag % TITELFARBEN.length]; // jeden Tag die nächste KinDo-Farbe
+  let grund = TITELFARBEN[tag % TITELFARBEN.length]; // jeden Tag die nächste KinDo-Farbe
+  // Nicht dieselbe Farbe wie der Kopf der Karte, sonst verschwimmt die Karte im Hintergrund
+  if (grund === farbe(s.tipp.kategorie)) grund = TITELFARBEN[(tag + 1) % TITELFARBEN.length];
   const schrift = titelschrift(grund);
   const [, m, d] = s.datum.split('-');
   const kurz = `${TAGE[new Date(s.datum).getUTCDay()]}, ${+d}.${+m}.`;
