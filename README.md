@@ -6,6 +6,7 @@ Hier liegt nichts, was nicht ohnehin auf Instagram erscheint.
 
 ## So entsteht ein Bild
 
+0. `node termine.js` listet die Wochenend-Termine von kindo.at (ein einziger Abruf).
 1. Eine Datei `beitraege/<Samstag>.json` mit Titel, Datum und bis zu 6 Terminen anlegen.
 2. `node bild.js beitraege/<Samstag>.json` – das Bild landet als `.png` daneben (1080 × 1350).
 3. Committen und pushen. Die öffentliche Adresse ist dann
