@@ -1,0 +1,11 @@
+{
+  "name": "kindo-social",
+  "private": true,
+  "description": "Bilder für die Instagram-Beiträge von KinDo",
+  "scripts": {
+    "bild": "node bild.js"
+  },
+  "dependencies": {
+    "playwright": "1.61.1"
+  }
+}

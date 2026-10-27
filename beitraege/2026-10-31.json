@@ -1,0 +1,12 @@
+{
+  "titel": "Halloween-Wochenende in Wien",
+  "datum": "Sa 31.10. & So 1.11.",
+  "eintraege": [
+    { "tag": "Sa", "titel": "Halloween-Familienfest im Wurstelprater", "info": "14 Uhr · gratis" },
+    { "tag": "Sa", "titel": "Süßigkeitenjagd am Neubau (7.)", "info": "15 Uhr · gratis · 3–12 J." },
+    { "tag": "Sa", "titel": "Praterkasperl: Süßes oder Saures", "info": "15 & 16 Uhr · 5,90 € · 3–10 J." },
+    { "tag": "Sa", "titel": "Halloween-Umzug in der Seestadt", "info": "17 Uhr · gratis · 4–10 J." },
+    { "tag": "So", "titel": "Magie für Kids: Spooky Doo", "info": "10 Uhr · Magic World im Prater · 2–8 J." },
+    { "tag": "So", "titel": "Familiensonntag im KunstHausWien", "info": "10:30 Uhr · Kinder 6 € · 4–10 J." }
+  ]
+}
