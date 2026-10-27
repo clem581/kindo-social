@@ -23,6 +23,13 @@ https://claude.ai/artifact/Ecvhsn4f6gb8cx7UUdaA8v
 
 Passt ein Text nicht aufs Bild, bricht `bild.js` mit einer Meldung ab.
 
+## Angepinnte Profil-Beiträge
+
+`node profil.js` erzeugt die drei Beiträge, die oben im Profil angepinnt werden („Was ist KinDo?“,
+„5 Ideen für Regentage“, „Veranstalter?“) im Ordner `beitraege/profil/`. Ihre Texte stehen direkt in
+`profil.js`, die Bildtexte für Instagram in `beitraege/profil/TEXTE.md`. Nur einen neu machen:
+`node profil.js regentage`.
+
 ## Montags: Tipps für die Woche
 
 Gleich wie oben, mit drei Unterschieden:

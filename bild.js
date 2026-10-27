@@ -78,21 +78,30 @@ ${zeile(ICON_WANN, t.wann)}${zeile(ICON_WO, t.wo)}${zeile(ICON_ALTER, t.alter)}$
 <div style="display: flex; justify-content: center; align-items: center; gap: 14px; font-weight: 900; font-size: 36px"><span>Alle Details auf kindo.at</span>${pfeil(40, 2.8)}</div></div>`;
 }
 
-function schlussFolie(b) {
-  const kachel = (d, titel, text) => `<div style="background: #ffffff; border: 5px solid ${INK}; border-radius: 34px; padding: 30px 24px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; box-shadow: 8px 10px 0 rgba(0,0,0,.14)">
+const ICON_SPEICHERN = '<path d="M6 3h12v18l-6-4-6 4z"></path>';
+const ICON_TEILEN = '<path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"></path>';
+const ICON_FOLGEN = '<circle cx="9" cy="8" r="4"></circle><path d="M2 21a7 7 0 0 1 14 0M19 8v6M16 11h6"></path>';
+// Die drei Kacheln unten auf dem Schlussbild der Wochen- und Wochenend-Beiträge
+const standardKacheln = merken => [
+  [ICON_SPEICHERN, 'Speichern', merken],
+  [ICON_TEILEN, 'Teilen', 'gemeinsam planen'],
+  [ICON_FOLGEN, 'Folgen', 'jeden Montag und Donnerstag neue Tipps'],
+];
+
+// s = { mehr: Überschrift, zeile: Satz unter kindo.at, kacheln: [[icon, titel, text] × 3] }
+function schlussFolie(s) {
+  const kachel = ([d, titel, text]) => `<div style="background: #ffffff; border: 5px solid ${INK}; border-radius: 34px; padding: 30px 24px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; box-shadow: 8px 10px 0 rgba(0,0,0,.14)">
 <svg aria-hidden="true" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="${INK}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>
 <div style="font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 44px; line-height: 1">${titel}</div>
 <div style="font-weight: 700; font-size: 28px; line-height: 1.25">${text}</div></div>`;
   return `<div id="folie" style="width: ${B}px; height: ${H}px; box-sizing: border-box; padding: 88px 84px; background: #ffc93c; display: flex; flex-direction: column; justify-content: space-between; align-items: center; font-family: 'Nunito', sans-serif; color: ${INK}; overflow: hidden">
 ${logo(true)}
 <div style="display: flex; flex-direction: column; align-items: center; gap: 40px">
-<h2 style="margin: 0; text-align: center; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 120px; line-height: .98; letter-spacing: -2px">${TEXTE[b.art].mehr}</h2>
+<h2 style="margin: 0; text-align: center; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 120px; line-height: .98; letter-spacing: -2px">${esc(s.mehr)}</h2>
 <div style="transform: rotate(-3deg); background: #ffffff; border: 7px solid ${INK}; border-radius: 40px; padding: 26px 64px 16px; box-shadow: 12px 14px 0 rgba(0,0,0,.18); font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 150px; line-height: 1; letter-spacing: -3px; color: #1477b8">kindo.at</div>
-<div style="font-weight: 800; font-size: 38px; text-align: center">Alle Termine in Wien – mit Filter nach Alter und Bezirk</div></div>
+<div style="font-weight: 800; font-size: 38px; text-align: center">${esc(s.zeile)}</div></div>
 <div style="width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
-${kachel('<path d="M6 3h12v18l-6-4-6 4z"></path>', 'Speichern', TEXTE[b.art].merken)}
-${kachel('<path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"></path>', 'Teilen', 'gemeinsam planen')}
-${kachel('<circle cx="9" cy="8" r="4"></circle><path d="M2 21a7 7 0 0 1 14 0M19 8v6M16 11h6"></path>', 'Folgen', 'jeden Montag und Donnerstag neue Tipps')}</div></div>`;
+${s.kacheln.map(kachel).join('\n')}</div></div>`;
 }
 
 function pruefen(b) {
@@ -123,9 +132,14 @@ async function main() {
   // Ohne BOM: PowerShell schreibt UTF-8-Dateien mit einem unsichtbaren Zeichen davor
   const b = JSON.parse(fs.readFileSync(quelle, 'utf8').replace(/^﻿/, ''));
   pruefen(b);
-  const folien = [titelFolie(b), ...b.tipps.map((t, i) => tippFolie(t, i + 1, b.tipps.length)), schlussFolie(b)];
+  const t = TEXTE[b.art];
+  const folien = [titelFolie(b), ...b.tipps.map((tipp, i) => tippFolie(tipp, i + 1, b.tipps.length)),
+    schlussFolie({ mehr: t.mehr, zeile: 'Alle Termine in Wien – mit Filter nach Alter und Bezirk', kacheln: standardKacheln(t.merken) })];
+  await rendern(folien, quelle.replace(/\.json$/, ''));
+}
 
-  const ordner = quelle.replace(/\.json$/, '');
+// Jede Folie als PNG 01.png, 02.png … in den Ordner; bricht ab, wenn ein Text nicht passt.
+async function rendern(folien, ordner) {
   fs.rmSync(ordner, { recursive: true, force: true });
   fs.mkdirSync(ordner, { recursive: true });
   // Die Seite muss neben fonts/ liegen, sonst lädt der Browser die Schriften nicht.
@@ -149,4 +163,7 @@ async function main() {
   }
 }
 
-main().catch(e => { console.error(e.message); process.exit(1); });
+// Bausteine für profil.js (Beiträge ohne Termine)
+module.exports = { B, H, INK, esc, farbe, logo, pfeil, schlussFolie, ICON_SPEICHERN, ICON_TEILEN, ICON_FOLGEN, rendern };
+
+if (require.main === module) main().catch(e => { console.error(e.message); process.exit(1); });
