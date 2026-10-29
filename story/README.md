@@ -1,8 +1,8 @@
-# Tipp des Tages – 28.10.
+# Tipp des Tages – 29.10.
 
-![Tipp des Tages: Kinderwerkstatt im Rauchfangkehrermuseum](2026-10-28/01.png)
+![Tipp des Tages: Halloween und der Besuch aus dem All](2026-10-29/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/264783
+**Link für den Sticker:** https://www.kindo.at/veranstaltungen/151575
 
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
