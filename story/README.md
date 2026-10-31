@@ -1,8 +1,8 @@
-# Tipp des Tages – 30.10.
+# Tipp des Tages – 31.10.
 
-![Tipp des Tages: Die Hexen sind los!](2026-10-30/01.png)
+![Tipp des Tages: Halloween am Zentralfriedhof](2026-10-31/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/264828
+**Link für den Sticker:** https://www.kindo.at/veranstaltungen/784247
 
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
