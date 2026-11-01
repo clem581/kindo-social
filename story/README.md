@@ -1,8 +1,8 @@
-# Tipp des Tages – 31.10.
+# Tipp des Tages – 1.11.
 
-![Tipp des Tages: Halloween am Zentralfriedhof](2026-10-31/01.png)
+![Tipp des Tages: Augmented Reality Show: Dinosaurier](2026-11-01/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/784247
+**Link für den Sticker:** https://www.kindo.at/veranstaltungen/930046
 
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
