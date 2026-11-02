@@ -1,0 +1,11 @@
+{
+  "art": "woche",
+  "datum": "3. – 6.11.",
+  "tipps": [
+    { "kategorie": "Basteln", "titel": "Architektur hands-on", "satz": "Architektur-Workshop zum Selberbauen im TU TRANSFORMER.", "wann": "Di, 16 Uhr", "wo": "TU TRANSFORMER, 3. Bezirk", "alter": "8–13 Jahre", "preis": "gratis" },
+    { "kategorie": "Lesen", "titel": "Musikalische Lesung mit Marko Simsa", "satz": "Musikalische Lesung zur Zauberflöte in der Kinderbuchhandlung.", "wann": "Mi, 16:30 Uhr", "wo": "Lesewelt, 8. Bezirk", "alter": "5–13 Jahre", "preis": "Kinder 3 €" },
+    { "kategorie": "Sport", "titel": "Winterfit für Kinder", "satz": "Kostenloses Bewegungsangebot im Freien auf der Kaiserwiese.", "wann": "Do, 16 Uhr", "wo": "Kaiserwiese, 2. Bezirk", "alter": "3–10 Jahre", "preis": "gratis" },
+    { "kategorie": "Feste", "titel": "Weihnachtsmarkt Schloss Schönbrunn", "satz": "Adventmarkt im Ehrenhof von Schloss Schönbrunn.", "wann": "Fr, ab 10 Uhr", "wo": "Schönbrunn, 13. Bezirk", "alter": "alle Alter", "preis": "gratis" },
+    { "kategorie": "Museum", "titel": "Familienführung im Parlament", "satz": "Rundgang durchs Parlament für Kinder und ihre Begleitung.", "wann": "Fr, 15:30 Uhr", "wo": "Parlament, 1. Bezirk", "alter": "5–8 Jahre", "preis": "gratis" }
+  ]
+}
