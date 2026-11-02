@@ -23,6 +23,20 @@ test('nur Veranstalter aus der Liste werden markiert, auf ihrem eigenen Bild', (
   });
 });
 
+test('Name nur teilweise gleich: nur eindeutige Treffer zählen', () => {
+  const l = {
+    'Bühne 1 · DSCHUNGEL WIEN, Museumsplatz 1': { instagram: 'dschungelwien' },
+    'DSCHUNGEL WIEN, MuseumsQuartier': { instagram: 'dschungelwien' },
+    'Schloss Schönbrunn': { instagram: 'schoenbrunnpalace' },
+    'Marionettentheater Schloss Schönbrunn': { instagram: 'marionettentheaterwien' },
+  };
+  const tags = namen => markierungen({ tipps: namen.map(veranstalter => ({ veranstalter })) }, l).erwaehnungen;
+  assert.deepStrictEqual(tags(['DSCHUNGEL WIEN']), ['@dschungelwien']);
+  assert.deepStrictEqual(tags(['Schloss Schönbrunn']), ['@schoenbrunnpalace']); // genau gleich geht vor
+  assert.deepStrictEqual(tags(['Schönbrunn']), []); // passt auf zwei verschiedene Konten
+  assert.deepStrictEqual(tags(['Wien']), []); // zu kurz
+});
+
 test('ein falsch geschriebener Name in der Liste bricht ab', () => {
   assert.throws(() => markierungen({ tipps: [{ veranstalter: 'X' }] }, { X: { instagram: '@x y' } }));
 });

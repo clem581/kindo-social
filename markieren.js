@@ -15,11 +15,21 @@ const NAME = /^[a-z0-9._]{1,30}$/;
 const KEIN_KONTO = new Set(['p', 'reel', 'reels', 'explore', 'stories', 'accounts', 'about', 'developer', 'legal', 'tv', 'direct', 'share', 'sharer']);
 const lesen = f => JSON.parse(fs.readFileSync(f, 'utf8').replace(/^﻿/, ''));
 
+// Eintrag zum Namen: genau gleich geschrieben, sonst ein Eintrag, der den Namen enthält (oder umgekehrt) –
+// aber nur, wenn alle so gefundenen Einträge dasselbe Konto haben („DSCHUNGEL WIEN“ → alle Dschungel-Bühnen)
+function eintragZu(name, liste) {
+  if (liste[name]) return liste[name];
+  const n = name.toLowerCase();
+  if (n.length < 6) return null;
+  const treffer = Object.entries(liste).filter(([k]) => k.toLowerCase().includes(n) || n.includes(k.toLowerCase())).map(([, e]) => e);
+  return treffer.length && treffer.every(e => e.instagram === treffer[0].instagram) ? treffer[0] : null;
+}
+
 function markierungen(b, liste) {
   const carouselTags = {}, erwaehnungen = [], fehlen = [];
   b.tipps.forEach((t, i) => {
     if (!t.veranstalter) return;
-    const eintrag = liste[t.veranstalter];
+    const eintrag = eintragZu(t.veranstalter, liste);
     if (!eintrag) { if (!fehlen.includes(t.veranstalter)) fehlen.push(t.veranstalter); return; }
     if (!eintrag.instagram) return;
     if (!NAME.test(eintrag.instagram)) throw new Error(`instagram.json: "${eintrag.instagram}" ist kein Instagram-Name`);
