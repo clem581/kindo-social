@@ -52,6 +52,19 @@ Kurs-Beiträge im Feed sofort.
   färbt `bild.js` die Tage im Stundenplan. Zusätzliche Kategorien: Tanzen, Schwimmen.
 - `node --test` prüft die Kurs-Auswahl von `termine.js`.
 
+## Veranstalter markieren
+
+Alle drei Karussells markieren die Veranstalter auf ihrem Bild und nennen sie mit @Namen im Text –
+aber nur, wenn ihr Instagram-Name in `instagram.json` steht. Geraten wird nie.
+
+- Jeder Tipp kann `veranstalter` haben (Name des Veranstalters oder Orts, z. B. `"EKIZ"`).
+- `node markieren.js beitraege/<datei>.json` gibt die Markierungen für Metricool (`carouselTags`), die
+  @Namen für den Text und die Veranstalter, die noch nicht in der Liste stehen.
+- `node markieren.js suchen https://<webseite des veranstalters>` zeigt die Instagram-Konten, die auf
+  dessen eigener Webseite verlinkt sind. Nur so ein Konto kommt in die Liste:
+  `"EKIZ": { "instagram": "name", "quelle": "https://…", "geprueft": "2026-11-07" }`.
+  Ist keins verlinkt: `"instagram": null` (nach 3 Monaten wieder nachsehen).
+
 ## Täglich: Story „Tipp des Tages“
 
 Eine Veranstaltung für heute als Story-Bild (1080 × 1920). Clemens postet sie selbst in der
