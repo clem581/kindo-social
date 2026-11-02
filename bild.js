@@ -10,6 +10,8 @@
 //                "wo": "Prater, 2. Bezirk", "alter": "alle Alter", "preis": "gratis" }, … ] }
 // 3 bis 5 Tipps. "preis" darf fehlen. Kategorien mit eigener Farbe: siehe FARBEN.
 // "art": "woche" macht den Montags-Beitrag (Tipps für die Woche), sonst Wochenende.
+// "art": "kurse" macht den Sonntags-Beitrag (Kurse, die nächste Woche anfangen): Datei kurse-<Montag>.json,
+// jeder Tipp hat zusätzlich "start" (JJJJ-MM-TT, Montag bis Sonntag dieser Woche).
 const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
@@ -19,6 +21,7 @@ const INK = '#2a2a3a';
 const FARBEN = {
   Basteln: '#f58fb0', Theater: '#a78be0', 'Draußen': '#7cc552', Museum: '#4bc0b8', Feste: '#e8654f',
   Musik: '#7cc552', Kino: '#2f9ae0', Sport: '#7cc552', Lesen: '#4bc0b8', Ausflug: '#7cc552', Zaubern: '#2f9ae0',
+  Tanzen: '#a78be0', Schwimmen: '#2f9ae0',
 };
 const farbe = k => FARBEN[k] || '#e8654f';
 // Das Titelbild wechselt reihum die Farbe: Montag, Wochenende, nächster Montag … nie zweimal hintereinander gleich,
@@ -38,6 +41,7 @@ function titelfarbe(quelle, art) {
 const TEXTE = {
   wochenende: { kopf: 'Wochenend-Tipps für Wien', frage: 'Was machen wir am Wochenende?', mehr: 'Noch mehr fürs Wochenende?', merken: 'am Samstag wiederfinden' },
   woche: { kopf: 'Wochen-Tipps für Wien', frage: 'Was machen wir diese Woche?', mehr: 'Noch mehr für diese Woche?', merken: 'für den Nachmittag merken' },
+  kurse: { kopf: 'Kurs-Start in Wien', frage: 'Neue Kurse ab Montag', mehr: 'Noch mehr Kurse?', merken: 'zum Anmelden merken' },
 };
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -74,6 +78,34 @@ function titelFolie(b, hintergrund) {
 <div style="width: 120px; height: 120px; border-radius: 999px; background: #ffc93c; border: 6px solid ${INK}; display: flex; align-items: center; justify-content: center">${pfeil(64, 2.8)}</div></div></div>`;
 }
 
+// Titelbild der Kurs-Beiträge: immer dunkel mit Heftkaros und einem Stundenplan Mo–So statt der Chips –
+// so erkennt man im Feed sofort, dass es um Kurse geht und nicht um Veranstaltungen (die sind bunt).
+function kursTitelFolie(b, montag) {
+  const tage = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'].map((tag, i) => {
+    const datum = new Date(Date.parse(montag) + i * 864e5).toISOString().slice(0, 10);
+    const n = b.tipps.filter(t => t.start === datum);
+    const stil = n.length
+      ? `background: ${farbe(n[0].kategorie)}; border: 5px solid #ffffff; box-shadow: 6px 8px 0 #000000; transform: rotate(${i % 2 ? 3 : -3}deg); color: ${INK}`
+      : 'border: 5px dashed rgba(255,255,255,.3); color: rgba(255,255,255,.45)';
+    return `<div style="flex: 1; height: 200px; box-sizing: border-box; border-radius: 26px; ${stil}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px">
+<div style="font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 52px; line-height: 1">${tag}</div>
+<div style="font-weight: 900; font-size: 30px">${+datum.slice(8)}.</div>
+<div style="font-weight: 900; font-size: 26px; height: 32px">${n.length ? n.length + ' Kurs' + (n.length > 1 ? 'e' : '') : ''}</div></div>`;
+  }).join('');
+  return `<div id="folie" style="width: ${B}px; height: ${H}px; box-sizing: border-box; padding: 88px 84px; background: ${INK}; background-image: linear-gradient(rgba(255,255,255,.06) 2px, transparent 2px), linear-gradient(90deg, rgba(255,255,255,.06) 2px, transparent 2px); background-size: 60px 60px; display: flex; flex-direction: column; justify-content: space-between; font-family: 'Nunito', sans-serif; color: ${INK}; overflow: hidden">
+<div style="display: flex; justify-content: space-between; align-items: center"><div style="display: inline-flex; border: 5px solid #ffffff; border-radius: 999px">${logo(true)}</div>
+<div style="transform: rotate(4deg); background: #ffc93c; border: 6px solid #ffffff; border-radius: 28px; padding: 18px 32px 12px; box-shadow: 10px 12px 0 #000000; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 46px; line-height: 1">${esc(b.datum)}</div></div>
+<div style="display: flex; flex-direction: column; gap: 22px">
+<div style="font-weight: 900; font-size: 40px; letter-spacing: 3px; text-transform: uppercase; color: #ffc93c">${TEXTE.kurse.kopf}</div>
+<h1 style="margin: 0; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 150px; line-height: .95; letter-spacing: -3px; color: #ffffff">${TEXTE.kurse.frage}</h1>
+<div style="display: flex; gap: 14px; margin-top: 30px">${tage}</div></div>
+<div style="display: flex; justify-content: space-between; align-items: center; background: #ffffff; border: 6px solid #ffffff; border-radius: 44px; padding: 30px 30px 30px 48px; box-shadow: 10px 12px 0 #000000">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 60px; line-height: 1.05">${b.tipps.length} Kurse zum Anmelden</div>
+<div style="font-weight: 800; font-size: 34px; color: #5f5f6b">nach links wischen</div></div>
+<div style="width: 120px; height: 120px; border-radius: 999px; background: #ffc93c; border: 6px solid ${INK}; display: flex; align-items: center; justify-content: center">${pfeil(64, 2.8)}</div></div></div>`;
+}
+
 // Die Tipp-Karte (farbiger Streifen, Titel, Satz, Wann/Wo/Alter/Preis); kreis = Inhalt des gelben Kreises
 function tippKarte(t, kreis) {
   const preis = t.preis ? `<div style="display: flex; align-items: center"><div style="transform: rotate(-3deg); background: #ffc93c; border: 5px solid ${INK}; border-radius: 18px; padding: 10px 28px 6px; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 48px; line-height: 1.1">${esc(t.preis)}</div></div>` : '';
@@ -88,10 +120,10 @@ function tippKarte(t, kreis) {
 ${zeile(ICON_WANN, t.wann)}${zeile(ICON_WO, t.wo)}${zeile(ICON_ALTER, t.alter)}${preis}</div></div></div>`;
 }
 
-function tippFolie(t, nr, von) {
+function tippFolie(t, nr, von, wort = 'Tipp') {
   return `<div id="folie" style="width: ${B}px; height: ${H}px; box-sizing: border-box; padding: 80px 84px; background: #fff6ea; display: flex; flex-direction: column; gap: 44px; font-family: 'Nunito', sans-serif; color: ${INK}; overflow: hidden">
 <div style="display: flex; justify-content: space-between; align-items: center">
-<div style="background: #ffffff; border: 5px solid ${INK}; border-radius: 999px; padding: 12px 30px; font-weight: 900; font-size: 36px">Tipp ${nr} von ${von}</div>${logo(false)}</div>
+<div style="background: #ffffff; border: 5px solid ${INK}; border-radius: 999px; padding: 12px 30px; font-weight: 900; font-size: 36px">${wort} ${nr} von ${von}</div>${logo(false)}</div>
 ${tippKarte(t, nr)}
 <div style="display: flex; justify-content: center; align-items: center; gap: 14px; font-weight: 900; font-size: 36px"><span>Alle Details auf kindo.at</span>${pfeil(40, 2.8)}</div></div>`;
 }
@@ -125,7 +157,7 @@ ${s.kacheln.map(kachel).join('\n')}</div></div>`;
 function pruefen(b) {
   if (!b.datum || !Array.isArray(b.tipps)) throw new Error('datum und tipps fehlen');
   b.art = b.art || 'wochenende';
-  if (!TEXTE[b.art]) throw new Error(`art muss "wochenende" oder "woche" sein, nicht "${b.art}"`);
+  if (!TEXTE[b.art]) throw new Error(`art muss "wochenende", "woche" oder "kurse" sein, nicht "${b.art}"`);
   if (b.tipps.length < 3 || b.tipps.length > 5) throw new Error('3 bis 5 Tipps nötig');
   b.tipps.forEach((t, i) => {
     for (const f of ['kategorie', 'titel', 'satz', 'wann', 'wo', 'alter']) if (!t[f]) throw new Error(`Tipp ${i + 1}: ${f} fehlt`);
@@ -151,8 +183,22 @@ async function main() {
   const b = JSON.parse(fs.readFileSync(quelle, 'utf8').replace(/^﻿/, ''));
   pruefen(b);
   const t = TEXTE[b.art];
-  const folien = [titelFolie(b, titelfarbe(quelle, b.art)),...b.tipps.map((tipp, i) => tippFolie(tipp, i + 1, b.tipps.length)),
-    schlussFolie({ mehr: t.mehr, zeile: 'Alle Termine in Wien – mit Filter nach Alter und Bezirk', kacheln: standardKacheln(t.merken) })];
+  const kurse = b.art === 'kurse';
+  let titel = titelFolie(b, titelfarbe(quelle, b.art));
+  if (kurse) {
+    const montag = (path.basename(quelle).match(/^kurse-(\d{4}-\d{2}-\d{2})\.json$/) || [])[1];
+    if (!montag || new Date(montag).getUTCDay() !== 1) throw new Error('Kurs-Datei muss kurse-<Montag>.json heißen');
+    const sonntag = new Date(Date.parse(montag) + 6 * 864e5).toISOString().slice(0, 10);
+    b.tipps.forEach((tipp, i) => {
+      if (!(tipp.start >= montag && tipp.start <= sonntag)) throw new Error(`Tipp ${i + 1}: start muss zwischen ${montag} und ${sonntag} liegen`);
+    });
+    titel = kursTitelFolie(b, montag);
+  }
+  const kacheln = kurse
+    ? [[ICON_SPEICHERN, 'Speichern', t.merken], [ICON_TEILEN, 'Teilen', 'gemeinsam planen'], [ICON_FOLGEN, 'Folgen', 'jeden Sonntag neue Kurse']]
+    : standardKacheln(t.merken);
+  const folien = [titel, ...b.tipps.map((tipp, i) => tippFolie(tipp, i + 1, b.tipps.length, kurse ? 'Kurs' : 'Tipp')),
+    schlussFolie({ mehr: t.mehr, zeile: kurse ? 'Alle Kurse in Wien – mit Filter nach Alter und Bezirk' : 'Alle Termine in Wien – mit Filter nach Alter und Bezirk', kacheln })];
   await rendern(folien, quelle.replace(/\.json$/, ''));
 }
 

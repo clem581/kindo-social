@@ -39,6 +39,19 @@ Gleich wie oben, mit drei Unterschieden:
   Titel- und Schlussbild sagen dann „diese Woche“ statt „Wochenende“.
 - `datum` nennt Dienstag bis Freitag, z. B. `"3. – 6.11."`.
 
+## Sonntags: Kurse, die nächste Woche starten
+
+Samstags erzeugt, Sonntag 8 Uhr veröffentlicht. Das Titelbild ist absichtlich anders als bei den
+Veranstaltungen: immer dunkel mit Heftkaros und einem Stundenplan Mo–So – so erkennt man die
+Kurs-Beiträge im Feed sofort.
+
+- `node termine.js kurse` listet die Kurse, die nächste Woche (Montag bis Sonntag) anfangen
+  (ein einziger Abruf von kindo.at/kurse), je Zeile mit `Start JJJJ-MM-TT`.
+- Die Datei heißt `beitraege/kurse-<Montag>.json` und hat `"art": "kurse"`. `datum` nennt Montag bis
+  Sonntag, z. B. `"9. – 15.11."`. Jeder Tipp hat zusätzlich `start` (der Tag aus der Liste) – daraus
+  färbt `bild.js` die Tage im Stundenplan. Zusätzliche Kategorien: Tanzen, Schwimmen.
+- `node --test` prüft die Kurs-Auswahl von `termine.js`.
+
 ## Täglich: Story „Tipp des Tages“
 
 Eine Veranstaltung für heute als Story-Bild (1080 × 1920). Clemens postet sie selbst in der
