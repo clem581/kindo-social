@@ -1,8 +1,8 @@
-# Tipp des Tages – 1.11.
+# Tipp des Tages – 2.11.
 
-![Tipp des Tages: Augmented Reality Show: Dinosaurier](2026-11-01/01.png)
+![Tipp des Tages: Geisterfest im Park](2026-11-02/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/930046
+**Link für den Sticker:** https://www.kindo.at/veranstaltungen/290311
 
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
