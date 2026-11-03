@@ -67,13 +67,14 @@ aber nur, wenn ihr Instagram-Name in `instagram.json` steht. Geraten wird nie.
 
 ## Täglich: Story „Tipp des Tages“
 
-Eine Veranstaltung für heute als Story-Bild (1080 × 1920). Clemens postet sie selbst in der
-Instagram-App – so zählt sie nicht zum Metricool-Kontingent und kann einen Link-Sticker bekommen.
+Eine Veranstaltung des Tages als Story-Bild (1080 × 1920), erzeugt schon am Vorabend um 20 Uhr.
+Clemens postet sie selbst in der Instagram-App – so zählt sie nicht zum Metricool-Kontingent und
+kann einen Link-Sticker bekommen.
 
-- `node termine.js heute` listet die Termine von heute (ein einziger Abruf).
-- Eine Datei `story/<heute>.json` anlegen: `datum` (`"2026-10-28"`), `tipp` (Felder wie oben) und
+- `node termine.js morgen` listet die Termine von morgen (ein einziger Abruf).
+- Eine Datei `story/<tag>.json` anlegen: `datum` (`"2026-10-28"`), `tipp` (Felder wie oben) und
   `link` (die Seite der Veranstaltung auf kindo.at).
-- `node story.js story/<heute>.json` – das Bild landet in `story/<heute>/01.png`, dazu `story/README.md`
+- `node story.js story/<tag>.json` – das Bild landet in `story/<tag>/01.png`, dazu `story/README.md`
   mit Bild und Link. Ältere Tage werden gelöscht, `story/verlauf.txt` merkt sich, was schon dran war.
 - Am Handy: https://github.com/clem581/kindo-social/tree/main/story – Bild speichern, Link kopieren.
 

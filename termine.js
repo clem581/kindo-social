@@ -3,7 +3,8 @@
 //         node termine.js woche    →  ab morgen bis Freitag, je Tag 1 Abruf mit Pause
 //                                     (die Wochen-Liste von kindo.at zeigt nur rund 300 Karten
 //                                     und reicht an einem Montag oft nicht bis Freitag)
-//         node termine.js heute    →  nur heute (1 Abruf), für die Story „Tipp des Tages“
+//         node termine.js heute    →  nur heute (1 Abruf)
+//         node termine.js morgen   →  nur morgen (1 Abruf), für die Story „Tipp des Tages“ (läuft am Vorabend)
 //         node termine.js kurse    →  Kurse, die nächste Woche (Mo–So) anfangen (1 Abruf von /kurse)
 // Ausgabe: eine Zeile je Termin: id | Tag Datum Monat Kategorie Alter Bezirk Titel Zeit Ort Preis …
 //          bei Kursen:           id | Start JJJJ-MM-TT | Kategorie Alter Bezirk Titel Rhythmus Einheiten Ort Preis
@@ -74,6 +75,7 @@ async function main() {
   const kurse = art === 'kurse' ? naechsteWoche(heute) : null;
   const urls = art === 'woche' ? wochentage().map(t => `${BASIS}/veranstaltungen?zeitraum=tag&tag=${t}`)
     : art === 'heute' ? [`${BASIS}/veranstaltungen?zeitraum=tag&tag=${heute}`]
+    : art === 'morgen' ? [`${BASIS}/veranstaltungen?zeitraum=tag&tag=${new Date(new Date(heute + 'T12:00:00Z').getTime() + 864e5).toISOString().slice(0, 10)}`]
     : kurse ? [`${BASIS}/kurse`]
     : [`${BASIS}/veranstaltungen/wochenende`];
   let n = 0;
