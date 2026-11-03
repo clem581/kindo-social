@@ -1,8 +1,8 @@
-# Tipp des Tages – 3.11.
+# Tipp des Tages – 4.11.
 
-![Tipp des Tages: ZOOM Atelier: Wo die wilde Wäsche wächst](2026-11-03/01.png)
+![Tipp des Tages: Robi im Herbst](2026-11-04/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/943244
+**Link für den Sticker:** https://www.kindo.at/veranstaltungen/594825
 
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
