@@ -1,8 +1,8 @@
-# Tipp des Tages – 2.11.
+# Tipp des Tages – 3.11.
 
-![Tipp des Tages: Geisterfest im Park](2026-11-02/01.png)
+![Tipp des Tages: ZOOM Atelier: Wo die wilde Wäsche wächst](2026-11-03/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/290311
+**Link für den Sticker:** https://www.kindo.at/veranstaltungen/943244
 
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
