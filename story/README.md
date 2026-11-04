@@ -1,8 +1,8 @@
-# Tipp des Tages – 4.11.
+# Tipp des Tages – 5.11.
 
-![Tipp des Tages: Robi im Herbst](2026-11-04/01.png)
+![Tipp des Tages: Vorlesestunde in der Bücherei Wieden](2026-11-05/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/594825
+**Link für den Sticker:** https://www.kindo.at/veranstaltungen/967120
 
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
