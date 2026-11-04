@@ -1,0 +1,10 @@
+{
+  "datum": "7. – 8.11.",
+  "tipps": [
+    { "kategorie": "Feste", "titel": "Weihnachtsmarkt Schloss Schönbrunn", "satz": "Adventmarkt im Ehrenhof von Schloss Schönbrunn für die ganze Familie.", "wann": "Sa, ab 10 Uhr", "wo": "Schönbrunn, 13. Bezirk", "alter": "alle Alter", "preis": "gratis", "veranstalter": "Schloss Schönbrunn" },
+    { "kategorie": "Basteln", "titel": "Grelle Socken – Stopfen statt Wegwerfen", "satz": "Offenes Atelier im Wien Museum am Karlsplatz.", "wann": "Sa, 11 Uhr", "wo": "Wien Museum, 4. Bezirk", "alter": "ab 8 Jahren", "preis": "gratis", "veranstalter": "Wien Museum" },
+    { "kategorie": "Draußen", "titel": "Jazz für die Allerkleinsten: Laternenfest", "satz": "Laternenumzug für Kinder im Servitenviertel.", "wann": "Sa, 16 Uhr", "wo": "Servitenplatz, 9. Bezirk", "alter": "0–12 Jahre", "preis": "freie Spende" },
+    { "kategorie": "Musik", "titel": "Marko Simsa: Mozart für Kinder", "satz": "Kinderkonzert mit Nachtmusik und Zauberflöte im Haus der Musik.", "wann": "So, 14 Uhr", "wo": "Haus der Musik, 1. Bezirk", "alter": "ab 5 Jahren", "preis": "13 €", "veranstalter": "Haus der Musik" },
+    { "kategorie": "Theater", "titel": "Hasenfuß – Apfelmus – Pfiffikus", "satz": "Clowntheater für Kinder im Theater Olé.", "wann": "So, 15 Uhr", "wo": "Theater Olé, 3. Bezirk", "alter": "4–10 Jahre", "preis": "Kinder 10 €", "veranstalter": "Theater Olé" }
+  ]
+}
