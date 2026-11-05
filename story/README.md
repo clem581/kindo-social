@@ -1,8 +1,8 @@
-# Tipp des Tages – 5.11.
+# Tipp des Tages – 6.11.
 
-![Tipp des Tages: Vorlesestunde in der Bücherei Wieden](2026-11-05/01.png)
+![Tipp des Tages: LaLaLa Kinderkonzert: Wach auf Cosmo!](2026-11-06/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/967120
+**Link für den Sticker:** https://www.kindo.at/veranstaltungen/797037
 
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
