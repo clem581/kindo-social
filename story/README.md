@@ -1,8 +1,8 @@
-# Tipp des Tages – 6.11.
+# Tipp des Tages – 8.11.
 
-![Tipp des Tages: LaLaLa Kinderkonzert: Wach auf Cosmo!](2026-11-06/01.png)
+![Tipp des Tages: Martinsumzug im Nordbahnviertel](2026-11-08/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/797037
+**Link für den Sticker:** https://www.kindo.at/veranstaltungen/475166
 
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
