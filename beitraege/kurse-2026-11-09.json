@@ -1,0 +1,11 @@
+{
+  "art": "kurse",
+  "datum": "9. – 15.11.",
+  "tipps": [
+    { "start": "2026-11-09", "kategorie": "Tanzen", "titel": "Mixed Styles 3+ Mighty Minis", "satz": "Tanzkurs für die Kleinsten mit 15 Einheiten, immer montags.", "wann": "ab Mo 9.11., 15:15 Uhr", "wo": "INDEED UNIQUE, 15. Bezirk", "alter": "ab 3 Jahren", "veranstalter": "INDEED UNIQUE - Studio Wien" },
+    { "start": "2026-11-10", "kategorie": "Sport", "titel": "Mutter-Baby-Gruppe I", "satz": "Gruppe für Babys mit Mama, 5 Einheiten, immer dienstags.", "wann": "ab Di 10.11., 10:30 Uhr", "wo": "EKIZ, 8. Bezirk", "alter": "4–6 Monate", "preis": "140 €", "veranstalter": "EKIZ – Eltern-Kind-Zentrum Wien" },
+    { "start": "2026-11-11", "kategorie": "Musik", "titel": "Musikentdecker", "satz": "Musikkurs für Kinder von 3 bis 6 Jahren, 11 Einheiten.", "wann": "ab Mi 11.11., 15:30 Uhr", "wo": "Meditationsraum, 22. Bezirk", "alter": "3–6 Jahre", "veranstalter": "Meditationsraum" },
+    { "start": "2026-11-12", "kategorie": "Sport", "titel": "Kinderyoga: Yoga-Abenteuer", "satz": "Kinderyoga mit 11 Einheiten, immer donnerstags.", "wann": "ab Do 12.11., 15:15 Uhr", "wo": "be your muse YOGA, 18. Bezirk", "alter": "3–6 Jahre", "veranstalter": "be your muse YOGA" },
+    { "start": "2026-11-14", "kategorie": "Sport", "titel": "Kinder-Eislaufkurs Anfänger", "satz": "Eislaufen lernen in 12 Einheiten, immer samstags.", "wann": "ab Sa 14.11., 15:00 Uhr", "wo": "Eisring Süd, 10. Bezirk", "alter": "5–12 Jahre", "preis": "180 €", "veranstalter": "Eisring Süd - Freifläche im abgesperrtem Raum" }
+  ]
+}
