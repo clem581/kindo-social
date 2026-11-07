@@ -1,8 +1,8 @@
-# Tipp des Tages – 8.11.
+# Tipp des Tages – 7.11.
 
-![Tipp des Tages: Martinsumzug im Nordbahnviertel](2026-11-08/01.png)
+![Tipp des Tages: Praterkasperl: Es geht ein Bi Ba Butzemann](2026-11-07/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/475166
+**Link für den Sticker:** https://www.kindo.at/veranstaltungen/824443
 
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
