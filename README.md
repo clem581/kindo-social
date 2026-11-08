@@ -13,8 +13,9 @@ https://claude.ai/artifact/Ecvhsn4f6gb8cx7UUdaA8v
 1. Eine Datei `beitraege/<Samstag>.json` anlegen:
    `datum` (z. B. `"31.10. – 1.11."`) und 3–5 `tipps`, je mit `kategorie`, `titel`, `satz`,
    `wann`, `wo`, `alter` und – wenn bekannt – `preis`.
-   Kategorien mit eigener Farbe: Basteln, Theater, Draußen, Museum, Feste, Musik, Kino, Sport,
-   Lesen, Ausflug, Zaubern.
+   Kategorien: Basteln, Theater, Draußen, Museum, Feste, Musik, Kino, Sport, Lesen, Ausflug,
+   Zaubern – jede hat ihre eigene Farbe (`FARBEN` in `bild.js`; `node --test` prüft, dass sich
+   keine zwei Kategorien eine Farbe teilen).
 2. `node bild.js beitraege/<Samstag>.json` – die Bilder landen im Ordner `beitraege/<Samstag>/`
    (1080 × 1350): `01.png` Titel, je ein Bild pro Tipp, zuletzt das Schlussbild.
 3. Committen und pushen. Die öffentlichen Adressen sind dann

@@ -18,10 +18,12 @@ const { chromium } = require('playwright');
 
 const B = 1080, H = 1350;
 const INK = '#2a2a3a';
+// Jede Kategorie hat ihre eigene Farbe, damit sich zwei Karten im selben Karussell nie gleichen (Clemens, 8.11.2026).
+// Die ersten sieben sind die KinDo-Farben, dazu sechs Sticker-Farben in derselben Helligkeit (dunkle Schrift bleibt lesbar).
 const FARBEN = {
   Basteln: '#f58fb0', Theater: '#a78be0', 'Draußen': '#7cc552', Museum: '#4bc0b8', Feste: '#e8654f',
-  Musik: '#7cc552', Kino: '#2f9ae0', Sport: '#7cc552', Lesen: '#4bc0b8', Ausflug: '#7cc552', Zaubern: '#2f9ae0',
-  Tanzen: '#a78be0', Schwimmen: '#2f9ae0',
+  Schwimmen: '#2f9ae0', Musik: '#ffc93c',
+  Sport: '#ff9a3c', Ausflug: '#c2d93f', Kino: '#7f9cf0', Zaubern: '#d97fd6', Tanzen: '#6fd3a0', Lesen: '#dcb98a',
 };
 const farbe = k => FARBEN[k] || '#e8654f';
 // Das Titelbild wechselt reihum die Farbe: Montag, Wochenende, nächster Montag … nie zweimal hintereinander gleich,
@@ -107,12 +109,13 @@ function kursTitelFolie(b, montag) {
 }
 
 // Die Tipp-Karte (farbiger Streifen, Titel, Satz, Wann/Wo/Alter/Preis); kreis = Inhalt des gelben Kreises
+// (auf gelbem Streifen ist der Kreis weiß, sonst wäre er unsichtbar)
 function tippKarte(t, kreis) {
   const preis = t.preis ? `<div style="display: flex; align-items: center"><div style="transform: rotate(-3deg); background: #ffc93c; border: 5px solid ${INK}; border-radius: 18px; padding: 10px 28px 6px; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 48px; line-height: 1.1">${esc(t.preis)}</div></div>` : '';
   return `<div id="karte" style="flex-grow: 1; min-height: 0; display: flex; flex-direction: column; background: #ffffff; border: 6px solid ${INK}; border-radius: 48px; box-shadow: 12px 14px 0 rgba(0,0,0,.16); overflow: hidden">
 <div style="height: 280px; flex-shrink: 0; background: ${farbe(t.kategorie)}; border-bottom: 6px solid ${INK}; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 48px 40px; box-sizing: border-box">
 <div style="background: #ffffff; border: 5px solid ${INK}; border-radius: 999px; padding: 10px 30px; font-weight: 900; font-size: 38px">${esc(t.kategorie)}</div>
-<div style="width: 190px; height: 190px; border-radius: 999px; background: #ffc93c; border: 6px solid ${INK}; box-shadow: 8px 10px 0 rgba(0,0,0,.16); display: flex; align-items: center; justify-content: center; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 130px; line-height: 1; padding-top: 14px; box-sizing: border-box; transform: rotate(-6deg)">${kreis}</div></div>
+<div style="width: 190px; height: 190px; border-radius: 999px; background: ${farbe(t.kategorie) === '#ffc93c' ? '#ffffff' : '#ffc93c'}; border: 6px solid ${INK}; box-shadow: 8px 10px 0 rgba(0,0,0,.16); display: flex; align-items: center; justify-content: center; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 130px; line-height: 1; padding-top: 14px; box-sizing: border-box; transform: rotate(-6deg)">${kreis}</div></div>
 <div style="padding: 48px 48px 40px; display: flex; flex-direction: column; gap: 22px; flex-grow: 1">
 <h2 id="titel" style="margin: 0; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 104px; line-height: .98; letter-spacing: -2px">${esc(t.titel)}</h2>
 <p style="margin: 0; font-weight: 700; font-size: 38px; line-height: 1.3; color: #4a4a58">${esc(t.satz)}</p>
@@ -228,7 +231,7 @@ async function rendern(folien, ordner, hoehe = H) {
 }
 
 // Bausteine für profil.js (Beiträge ohne Termine) und story.js (Tipp des Tages)
-module.exports = { B, H, INK, esc, farbe, logo, pfeil, schlussFolie, ICON_SPEICHERN, ICON_TEILEN, ICON_FOLGEN, rendern,
+module.exports = { B, H, INK, esc, FARBEN, farbe, logo, pfeil, schlussFolie, ICON_SPEICHERN, ICON_TEILEN, ICON_FOLGEN, rendern,
   tippKarte, TITELFARBEN, titelschrift };
 
 if (require.main === module) main().catch(e => { console.error(e.message); process.exit(1); });
