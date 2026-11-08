@@ -1,8 +1,8 @@
-# Tipp des Tages – 7.11.
+# Tipp des Tages – 9.11.
 
-![Tipp des Tages: Praterkasperl: Es geht ein Bi Ba Butzemann](2026-11-07/01.png)
+![Tipp des Tages: Seifenblasen mit Ecken](2026-11-09/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/824443
+**Link für den Sticker:** https://www.kindo.at/veranstaltungen/551128
 
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
