@@ -1,8 +1,8 @@
-# Tipp des Tages – 9.11.
+# Tipp des Tages – 10.11.
 
-![Tipp des Tages: Seifenblasen mit Ecken](2026-11-09/01.png)
+![Tipp des Tages: Tri Tra Trallala – der Kasperl ist da](2026-11-10/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/551128
+**Link für den Sticker:** https://www.kindo.at/veranstaltungen/1039122
 
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
