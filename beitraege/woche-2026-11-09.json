@@ -1,0 +1,11 @@
+{
+  "art": "woche",
+  "datum": "10. – 13.11.",
+  "tipps": [
+    { "kategorie": "Basteln", "titel": "Seifenblasen mit Ecken", "satz": "Workshop zum Experimentieren im TU Transformer am Rennweg.", "wann": "Di, 16 Uhr", "wo": "TU TRANSFORMER, 3. Bezirk", "alter": "6–12 Jahre", "preis": "gratis", "veranstalter": "TU TRANSFORMER" },
+    { "kategorie": "Draußen", "titel": "Laternenumzug durch den Park", "satz": "Gemeinsam den Park erleuchten – für Kinder und Eltern.", "wann": "Mi, 16 Uhr", "wo": "Leopoldstadt, 2. Bezirk", "alter": "0–10 Jahre", "preis": "4 €", "veranstalter": "Nachbarschaftszentrum 02" },
+    { "kategorie": "Theater", "titel": "Alle Kinder nach Kinderstadt", "satz": "Theaterstück für Kinder ab 6 im Theater der Jugend.", "wann": "Do, 16 Uhr", "wo": "Theater der Jugend, 7. Bezirk", "alter": "ab 6 Jahren", "veranstalter": "TdJ Neubaugasse (Theater der Jugend)" },
+    { "kategorie": "Feste", "titel": "Wiener Christkindlmarkt am Rathausplatz", "satz": "Kostenloser Weihnachtsmarkt vor dem Rathaus, auch für Familien.", "wann": "Fr, ab 10 Uhr", "wo": "Rathausplatz, 1. Bezirk", "alter": "alle Alter", "preis": "gratis" },
+    { "kategorie": "Musik", "titel": "Wiener Sängerknaben: Friday Afternoon", "satz": "Chorkonzert der Wiener Sängerknaben für Kinder ab 4 im MuTh.", "wann": "Fr, 17 Uhr", "wo": "MuTh, 2. Bezirk", "alter": "ab 4 Jahren", "preis": "ab 14 €", "veranstalter": "MuTh · Am Augartenspitz 1, 1020 Wien" }
+  ]
+}
