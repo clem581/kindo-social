@@ -66,6 +66,22 @@ aber nur, wenn ihr Instagram-Name in `instagram.json` steht. Geraten wird nie.
   `"EKIZ": { "instagram": "name", "quelle": "https://…", "geprueft": "2026-11-07" }`.
   Ist keins verlinkt: `"instagram": null` (nach 3 Monaten wieder nachsehen).
 
+## Verifizierte Veranstaltungen
+
+Auf kindo.at kann Clemens Veranstaltungen mit einem Verifiziert-Stempel versehen. `termine.js`
+schreibt vor solche Zeilen ein Kennzeichen:
+
+- `✔ VERIFIZIERT „<Titel>“ – muss rein`: kommt in den Beitrag, sofern sie die übrigen Regeln
+  erfüllt (Uhrzeit, kein Gottesdienst …). Im Karussell als Tipp, bei der Story als der Tipp des Tages.
+  Den Titel aus dem Kennzeichen als Feld `"verifiziert"` in den Tipp schreiben – daran erkennt
+  `termine.js` beim nächsten Mal, dass sie schon dran war.
+- `✔ VERIFIZIERT – schon gezeigt (…)` bzw. `– gleiche Veranstaltung wie oben`: war schon im Feed
+  (bzw. als Story) oder steht in dieser Liste noch einmal (z. B. ein Theaterstück an mehreren Tagen) –
+  nicht noch einmal nehmen.
+
+Jede verifizierte Veranstaltung kommt so einmal in ein Karussell und einmal als Story.
+Geprüft wird für Karussells in `beitraege/*.json`, für die Story in `story/verlauf.txt`.
+
 ## Täglich: Story „Tipp des Tages“
 
 Eine Veranstaltung des Tages als Story-Bild (1080 × 1920), erzeugt schon am Vorabend um 20 Uhr.

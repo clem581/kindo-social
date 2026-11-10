@@ -71,7 +71,8 @@ Nur der Sticker-Link (fester Link, zum Kopieren): https://raw.githubusercontent.
   const verlauf = path.join(ordner, 'verlauf.txt');
   // Eine Zeile je Tag; wird ein Tag neu erzeugt, ersetzt die neue Zeile die alte
   const alt = fs.existsSync(verlauf) ? fs.readFileSync(verlauf, 'utf8').split('\n').filter(z => z && !z.startsWith(`${s.datum} |`)) : [];
-  fs.writeFileSync(verlauf, [...alt, `${s.datum} | ${s.link} | ${s.tipp.titel}`].join('\n') + '\n');
+  // Verifizierte Veranstaltung: ihr voller Titel, damit termine.js sie wiedererkennt (README)
+  fs.writeFileSync(verlauf, [...alt, `${s.datum} | ${s.link} | ${s.tipp.verifiziert || s.tipp.titel}`].join('\n') + '\n');
 }
 
 main().catch(e => { console.error(e.message); process.exit(1); });
