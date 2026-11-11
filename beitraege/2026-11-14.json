@@ -1,0 +1,10 @@
+{
+  "datum": "14. – 15.11.",
+  "tipps": [
+    { "kategorie": "Theater", "titel": "AUSFLUG/UTFLUKT", "satz": "Live-Musik, Animationsfilm und Performance von Wien Modern und Dschungel Wien.", "wann": "Sa, 10:30 & 15:30 Uhr", "wo": "Dschungel Wien, 7. Bezirk", "alter": "4–8 Jahre", "veranstalter": "Bühne 1 · DSCHUNGEL WIEN, Museumsplatz 1, 1070 Wien", "verifiziert": "AUSFLUG/UTFLUKT" },
+    { "kategorie": "Feste", "titel": "Das Weihnachtspostamt", "satz": "Hier schreiben Kinder und Familien Briefe ans Christkind.", "wann": "Sa, 10 Uhr", "wo": "Stadthalle, 15. Bezirk", "alter": "ab 4 Jahren", "preis": "gratis", "veranstalter": "Wiener Stadthalle, Studio F" },
+    { "kategorie": "Museum", "titel": "Familienführung im Parlament", "satz": "Rundgang durchs Parlament für Kinder und ihre Begleitung.", "wann": "Sa, 14 Uhr", "wo": "Parlament, 1. Bezirk", "alter": "5–8 Jahre", "preis": "gratis", "veranstalter": "Parlament" },
+    { "kategorie": "Musik", "titel": "Peter und der Wolf", "satz": "Kinderkonzert mit dem Klassiker von Sergei Prokofjew im Ehrbar Saal.", "wann": "So, 11 Uhr", "wo": "Ehrbar Saal, 4. Bezirk", "alter": "ab 4 Jahren", "preis": "gratis (Zählkarte)", "veranstalter": "Ehrbar Saal" },
+    { "kategorie": "Draußen", "titel": "Sonne am Sonntag", "satz": "Sonnenbeobachtung im Garten der Kuffner-Sternwarte.", "wann": "So, 14 Uhr", "wo": "Kuffner-Sternwarte, 16. Bezirk", "alter": "alle Alter", "preis": "gratis", "veranstalter": "Kuffner-Sternwarte" }
+  ]
+}

@@ -483,5 +483,20 @@
     "instagram": "transformer_tuwien",
     "quelle": "https://transformer.project.tuwien.ac.at",
     "geprueft": "2026-11-09"
+  },
+  "Wiener Stadthalle, Studio F": {
+    "instagram": "wiener_stadthalle",
+    "quelle": "https://www.stadthalle.com/",
+    "geprueft": "2026-11-11"
+  },
+  "Ehrbar Saal": {
+    "instagram": "ehrbarsaal.wien",
+    "quelle": "https://ehrbarsaal.at/",
+    "geprueft": "2026-11-11"
+  },
+  "Kuffner-Sternwarte": {
+    "instagram": null,
+    "quelle": "https://kuffner-sternwarte.at/",
+    "geprueft": "2026-11-11"
   }
 }
