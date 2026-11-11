@@ -1,8 +1,8 @@
-# Tipp des Tages – 11.11.
+# Tipp des Tages – 12.11.
 
-![Tipp des Tages: Ich geh’ mit meiner Laterne](2026-11-11/01.png)
+![Tipp des Tages: SeeLightNight](2026-11-12/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/1067717
+**Link für den Sticker:** https://www.kindo.at/veranstaltungen/658260
 
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
