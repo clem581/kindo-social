@@ -63,7 +63,7 @@ const BEITRAEGE = {
     ],
     schluss: { mehr: 'Kostenlos und ohne Konto', zeile: 'Alle Termine und Orte für Familien in Wien',
       kacheln: [[ICON_SPEICHERN, 'Speichern', 'für später'], [ICON_TEILEN, 'Teilen', 'mit anderen Eltern'],
-        [ICON_FOLGEN, 'Folgen', 'jeden Montag und Donnerstag neue Tipps']] },
+        [ICON_FOLGEN, 'Folgen', 'jeden Montag und Freitag neue Tipps']] },
   },
   'regentage': {
     deckblatt: { grund: BLAU, sticker: 'Für jedes Wetter', kopf: 'Dauerbrenner für Wien', titel: '5 Ideen für Regentage',
@@ -88,7 +88,7 @@ const BEITRAEGE = {
     ],
     schluss: { mehr: 'Noch mehr Regen-Ideen?', zeile: 'Orte und Termine für jedes Wetter in Wien',
       kacheln: [[ICON_SPEICHERN, 'Speichern', 'für den nächsten Regentag'], [ICON_TEILEN, 'Teilen', 'mit anderen Eltern'],
-        [ICON_FOLGEN, 'Folgen', 'jeden Montag und Donnerstag neue Tipps']] },
+        [ICON_FOLGEN, 'Folgen', 'jeden Montag und Freitag neue Tipps']] },
   },
   'veranstalter': {
     deckblatt: { grund: KORALLE, sticker: 'Für Veranstalter', kopf: 'Theater, Museen, Vereine …', titel: 'So kommt euer Termin auf KinDo',

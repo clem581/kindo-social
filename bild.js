@@ -138,7 +138,7 @@ const ICON_FOLGEN = '<circle cx="9" cy="8" r="4"></circle><path d="M2 21a7 7 0 0
 const standardKacheln = merken => [
   [ICON_SPEICHERN, 'Speichern', merken],
   [ICON_TEILEN, 'Teilen', 'gemeinsam planen'],
-  [ICON_FOLGEN, 'Folgen', 'jeden Montag und Donnerstag neue Tipps'],
+  [ICON_FOLGEN, 'Folgen', 'jeden Montag und Freitag neue Tipps'],
 ];
 
 // s = { mehr: Überschrift, zeile: Satz unter kindo.at, kacheln: [[icon, titel, text] × 3] }
