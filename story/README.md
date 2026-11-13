@@ -1,8 +1,8 @@
-# Tipp des Tages – 13.11.
+# Tipp des Tages – 14.11.
 
-![Tipp des Tages: Laternenumzug in Hernals](2026-11-13/01.png)
+![Tipp des Tages: AUSFLUG/UTFLUKT](2026-11-14/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/290321
+**Link für den Sticker:** https://www.kindo.at/veranstaltungen/157071
 
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
