@@ -13,7 +13,7 @@ test('Beitrag braucht JPEG-Bilder 01.jpg … ohne Lücke und gültige Markierung
   assert.doesNotThrow(() => pruefePost({ text: 'x', markierungen: [{ bild: 2, name: 'hausdesmeeres' }] }, ['01.jpg', '02.jpg']));
   assert.throws(() => pruefePost({ text: 'x' }, ['01.png']), /nur JPEG/);
   assert.throws(() => pruefePost({ text: 'x' }, ['01.jpg', '03.jpg']), /ohne Lücke/);
-  assert.throws(() => pruefePost({ text: 'x' }, []), /1 bis 10/);
+  assert.throws(() => pruefePost({ text: 'x' }, []), /1 bis 20/);
   assert.throws(() => pruefePost({ text: 'x', markierungen: [{ bild: 3, name: 'kindo_wien' }] }, ['01.jpg']), /Bild 3/);
   assert.throws(() => pruefePost({ text: 'x', markierungen: [{ bild: 1, name: '@Kindo Wien' }] }, ['01.jpg']), /kein Instagram-Name/);
   assert.throws(() => pruefePost({ text: 'Wetter: {{wetter}}' }, ['01.jpg']), /wetterTage/);

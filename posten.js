@@ -34,7 +34,7 @@ function wetterText(daily) {
 
 function pruefePost(post, bilder) {
   if (!post || typeof post.text !== 'string' || !post.text.trim()) throw new Error('post.json: text fehlt');
-  if (bilder.length < 1 || bilder.length > 10) throw new Error('1 bis 10 Bilder nötig (01.jpg, 02.jpg …)');
+  if (bilder.length < 1 || bilder.length > 20) throw new Error('1 bis 20 Bilder nötig (01.jpg, 02.jpg …)');
   if (bilder.some((b, i) => b !== String(i + 1).padStart(2, '0') + '.jpg')) throw new Error('Bilder müssen 01.jpg, 02.jpg … ohne Lücke heißen (nur JPEG)');
   for (const m of post.markierungen || []) {
     if (!NAME.test(m.name || '')) throw new Error(`Markierung "${m.name}" ist kein Instagram-Name`);
