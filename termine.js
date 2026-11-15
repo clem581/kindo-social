@@ -43,13 +43,18 @@ function naechsteWoche(heute) {
   return [mo, new Date(mo.getTime() + 6 * 864e5)].map(x => x.toISOString().slice(0, 10));
 }
 
-// Kursbeginn aus dem Kartentext: „· ab 9. Nov“ (in einem anderen Jahr „ab 13. Jän 2027“);
+// Kursbeginn aus dem Kartentext. Seit 9.11.2026 (KinDo KT-273) steht er im Datums-Schild
+// „Beginn 16 Nov“ (ohne Jahr), davor als „· ab 9. Nov“ bzw. „ab 13. Jän 2027“.
 // „Anmeldung ab …“ ist nicht der Beginn. Laufende Kurse („bis …“) haben keinen → ''.
 function kursStart(karte, heute) {
-  const m = karte.match(new RegExp(`(?<!Anmeldung )\\bab (\\d{1,2})\\. (${MONATE.join('|')})(?: (\\d{4}))?`));
+  const mon = `(${MONATE.join('|')}|Jan|März)\\.?`;
+  const m = karte.match(new RegExp(`\\bBeginn (\\d{1,2})\\.? ${mon}`))
+    || karte.match(new RegExp(`(?<!Anmeldung )\\bab (\\d{1,2})\\. ${mon}(?: (\\d{4}))?`));
   if (!m) return '';
-  const mon = String(MONATE.indexOf(m[2]) + 1).padStart(2, '0');
-  return `${m[3] || heute.slice(0, 4)}-${mon}-${m[1].padStart(2, '0')}`;
+  const nr = MONATE.indexOf(m[2].replace('Jan', 'Jän').replace('März', 'Mär')) + 1;
+  // Ohne Jahr: ein Monat vor dem heutigen gehört ins nächste Jahr (Dezember → Jänner)
+  const jahr = m[3] || String(Number(heute.slice(0, 4)) + (nr < Number(heute.slice(5, 7)) ? 1 : 0));
+  return `${jahr}-${String(nr).padStart(2, '0')}-${m[1].padStart(2, '0')}`;
 }
 
 // Titel vergleichbar machen: klein, nur Buchstaben und Ziffern
@@ -91,6 +96,7 @@ function stempel(body, art, gesehen, ordner) {
 // Alle Karten einer Liste; mit kurse = [Montag, Sonntag] nur die Kurse, die in dieser Woche anfangen
 async function liste(url, kurse, art, gesehen) {
   const res = await fetch(url);
+  if (res.status === 404 && url.includes('seite=')) return 0; // so viele Seiten gibt es gerade nicht
   if (!res.ok) throw new Error(`kindo.at antwortet mit ${res.status} (${url})`);
   const karten = (await res.text()).split('<article class="card event-card').slice(1);
   let treffer = 0;
@@ -115,7 +121,8 @@ async function main() {
   const urls = art === 'woche' ? wochentage().map(t => `${BASIS}/veranstaltungen?zeitraum=tag&tag=${t}`)
     : art === 'heute' ? [`${BASIS}/veranstaltungen?zeitraum=tag&tag=${heute}`]
     : art === 'morgen' ? [`${BASIS}/veranstaltungen?zeitraum=tag&tag=${new Date(new Date(heute + 'T12:00:00Z').getTime() + 864e5).toISOString().slice(0, 10)}`]
-    : kurse ? [`${BASIS}/kurse`]
+    // /kurse zeigt 50 je Seite, nach Beginn sortiert – von Samstag aus reicht Seite 1 oft nicht bis Sonntag
+    : kurse ? [`${BASIS}/kurse`, `${BASIS}/kurse?seite=2`]
     : [`${BASIS}/veranstaltungen/wochenende`];
   let n = 0;
   const gesehen = new Set();

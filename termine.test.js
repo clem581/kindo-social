@@ -52,3 +52,10 @@ test('Kursbeginn aus dem Kartentext', () => {
   // Laufender Kurs: nur „bis …“ und eine Anmeldefrist – kein Beginn
   assert.strictEqual(kursStart('Turnen Di 16:00 · bis 12. Dez Preis beim Anbieter Anmeldung ab 9. Nov, 10:00', heute), '');
 });
+
+test('Kursbeginn aus dem Datums-Schild „Beginn 16 Nov“ (seit KT-273)', () => {
+  assert.strictEqual(kursStart('Beginn 16 Nov Musik ab 3 J. Ballett Mo 15:30 · 10 Einheiten Anmeldung ab 9. Nov, 10:00', '2026-11-14'), '2026-11-16');
+  // ohne Jahr über den Jahreswechsel
+  assert.strictEqual(kursStart('Beginn 4 Jan Schwimmen Sa 10:00', '2026-12-26'), '2027-01-04');
+  assert.strictEqual(kursStart('Beginn 9 März Tanzen', '2026-12-26'), '2027-03-09');
+});

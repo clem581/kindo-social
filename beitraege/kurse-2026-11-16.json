@@ -1,0 +1,11 @@
+{
+  "art": "kurse",
+  "datum": "16. – 22.11.",
+  "tipps": [
+    { "start": "2026-11-16", "kategorie": "Lesen", "titel": "Schreibworkshop: Deutsch für Schulkinder", "satz": "Texte verfassen, Deutsch in allen Fächern – 5 Einheiten von Mo bis Fr.", "wann": "ab Mo 16.11., 16:00 Uhr", "wo": "Sprachenstudio, 6. Bezirk", "alter": "für Schulkinder", "preis": "270 €", "veranstalter": "Das Sprachenstudio Wien" },
+    { "start": "2026-11-17", "kategorie": "Sport", "titel": "Klettern für Anfänger – Modul 1", "satz": "Spielerisch klettern lernen in 5 Einheiten, immer dienstags.", "wann": "ab Di 17.11., 14:45 Uhr", "wo": "ÖTK-Kletterhalle, 1. Bezirk", "alter": "6–9 Jahre", "preis": "149 €", "veranstalter": "ÖTK-Kletterhalle" },
+    { "start": "2026-11-19", "kategorie": "Musik", "titel": "MiniSeestimmen – Kinderchor", "satz": "Die eigene Stimme entdecken, 11 Einheiten, immer donnerstags.", "wann": "ab Do 19.11., 16:00 Uhr", "wo": "Seestadt, 22. Bezirk", "alter": "6–10 Jahre", "veranstalter": "Medienraum" },
+    { "start": "2026-11-20", "kategorie": "Basteln", "titel": "Spielend durch den Advent", "satz": "Spielgruppe mit Begleitperson durch die Adventzeit, 5 Einheiten.", "wann": "ab Fr 20.11., 11:30 Uhr", "wo": "Spielringel, 18. Bezirk", "alter": "0–5 Jahre", "preis": "99 €", "veranstalter": "Spielringel" },
+    { "start": "2026-11-21", "kategorie": "Sport", "titel": "Eislaufkurs A für Anfänger", "satz": "Eislaufen lernen in 10 Einheiten, immer samstags.", "wann": "ab Sa 21.11., 10:10 Uhr", "wo": "Eisring Süd, 10. Bezirk", "alter": "6–11 Jahre", "preis": "150 €", "veranstalter": "Eisring Süd (Freifläche)" }
+  ]
+}
