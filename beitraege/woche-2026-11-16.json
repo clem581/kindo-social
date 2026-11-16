@@ -1,0 +1,11 @@
+{
+  "art": "woche",
+  "datum": "17. – 20.11.",
+  "tipps": [
+    { "kategorie": "Theater", "titel": "Tri Tra Trallala – der Kasperl ist da", "satz": "Kasperltheater für Kinder im Q19 Einkaufsquartier in Döbling.", "wann": "Di, 15 & 17 Uhr", "wo": "Q19, 19. Bezirk", "alter": "3–8 Jahre", "preis": "gratis", "veranstalter": "Q19 Einkaufsquartier Döbling" },
+    { "kategorie": "Sport", "titel": "Schwertkunst und Bogenschießen", "satz": "Kostenloser Mitmach-Workshop für Kinder im Shinmu.", "wann": "Mi, ab 16 Uhr", "wo": "Shinmu, 3. Bezirk", "alter": "3–13 Jahre", "preis": "gratis", "veranstalter": "Shinmu" },
+    { "kategorie": "Basteln", "titel": "Pralinen-Workshop für Kinder", "satz": "Kreativer Pralinen-Workshop im HEINDL SchokoMuseum.", "wann": "Mi, 16 Uhr", "wo": "SchokoMuseum, 23. Bezirk", "alter": "4–14 Jahre", "preis": "22 €", "veranstalter": "HEINDL SchokoMuseum" },
+    { "kategorie": "Draußen", "titel": "Winterfit für Kinder", "satz": "Kostenlose Bewegung im Freien auf der Kaiserwiese.", "wann": "Do, 16 Uhr", "wo": "Kaiserwiese, 2. Bezirk", "alter": "3–10 Jahre", "preis": "gratis", "veranstalter": "Schischule Ötscher Hohe Wand Wiese" },
+    { "kategorie": "Kino", "titel": "Auf der Suche nach der Weihnachtswerkstatt", "satz": "Animationsfilm im Adventkino des Filmhaus Spittelberg.", "wann": "Fr, 15:30 Uhr", "wo": "Spittelberg, 7. Bezirk", "alter": "4–12 Jahre", "preis": "Kinder gratis", "veranstalter": "Filmhaus Spittelberg" }
+  ]
+}
