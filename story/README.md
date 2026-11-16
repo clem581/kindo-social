@@ -1,8 +1,8 @@
-# Tipp des Tages – 16.11.
+# Tipp des Tages – 17.11.
 
-![Tipp des Tages: Weihnachtsmarkt am Spittelberg](2026-11-16/01.png)
+![Tipp des Tages: Kinderfilmfestival: Zusammen finden](2026-11-17/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/840255
+**Link für den Sticker:** https://www.kindo.at/veranstaltungen/460821
 
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
