@@ -1,8 +1,8 @@
-# Tipp des Tages – 17.11.
+# Tipp des Tages – 18.11.
 
-![Tipp des Tages: Kinderfilmfestival: Zusammen finden](2026-11-17/01.png)
+![Tipp des Tages: Mia und der Schattenfleck](2026-11-18/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/460821
+**Link für den Sticker:** https://www.kindo.at/veranstaltungen/6438
 
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
