@@ -2,7 +2,8 @@
 // Aufruf: node posten.js beitraege/claude/<id>            → postet sofort
 //         node posten.js beitraege/claude/<id> --probe    → prüft Schlüssel, Bilder und Text, postet nichts
 // Ordner: post.json ({ "text", "markierungen": [{ "bild", "name", "x", "y" }], "wetterTage": ["JJJJ-MM-TT", …] })
-// und 01.jpg, 02.jpg … (ein Bild = Einzelbild, mehrere = Karussell; die Schnittstelle nimmt nur JPEG).
+// und 01.jpg, 02.jpg … (ein Bild = Einzelbild, mehrere = Karussell; die Schnittstelle nimmt nur JPEG)
+// oder statt der Bilder reel.mp4 (= Reel, z. B. aus werkstatt/reel.js; erscheint auch im Feed).
 // „{{wetter}}“ im Text wird beim Posten durch die aktuelle Vorhersage für Wien ersetzt (Open-Meteo).
 // Ablauf: Ordner committen und pushen (Instagram holt die Bilder von raw.githubusercontent.com),
 // veröffentlichen, gepostet.json schreiben, wieder committen. Liegt gepostet.json schon da, bricht der Lauf ab.
@@ -32,10 +33,13 @@ function wetterText(daily) {
   return `Laut Vorhersage: ${teile.join(', ')}. ${nass ? 'Plan B also besser griffbereit halten!' : 'Sieht nach Plan A aus!'}`;
 }
 
-function pruefePost(post, bilder) {
+function pruefePost(post, bilder, video = false) {
   if (!post || typeof post.text !== 'string' || !post.text.trim()) throw new Error('post.json: text fehlt');
-  if (bilder.length < 1 || bilder.length > 20) throw new Error('1 bis 20 Bilder nötig (01.jpg, 02.jpg …)');
-  if (bilder.some((b, i) => b !== String(i + 1).padStart(2, '0') + '.jpg')) throw new Error('Bilder müssen 01.jpg, 02.jpg … ohne Lücke heißen (nur JPEG)');
+  if (video) {
+    if (bilder.length) throw new Error('Entweder Video oder Bilder – reel.mp4 und 01.jpg … nicht im selben Ordner');
+    if ((post.markierungen || []).length) throw new Error('Markierungen gehen bei Reels hier noch nicht');
+  } else if (bilder.length < 1 || bilder.length > 20) throw new Error('1 bis 20 Bilder nötig (01.jpg, 02.jpg …)');
+  if (!video && bilder.some((b, i) => b !== String(i + 1).padStart(2, '0') + '.jpg')) throw new Error('Bilder müssen 01.jpg, 02.jpg … ohne Lücke heißen (nur JPEG)');
   for (const m of post.markierungen || []) {
     if (!NAME.test(m.name || '')) throw new Error(`Markierung "${m.name}" ist kein Instagram-Name`);
     if (!(m.bild >= 1 && m.bild <= bilder.length)) throw new Error(`Markierung ${m.name}: Bild ${m.bild} gibt es nicht`);
@@ -74,15 +78,15 @@ async function wetterVorhersage(tage) {
   return wetterText(json.daily);
 }
 
-// Container fertig verarbeitet? Instagram lädt die Bilder selbst herunter
-async function fertig(id, token) {
-  for (let i = 0; i < 40; i++) {
+// Container fertig verarbeitet? Instagram lädt Bilder bzw. Video selbst herunter (ein Video braucht länger: bis 5 Minuten)
+async function fertig(id, token, versuche = 40) {
+  for (let i = 0; i < versuche; i++) {
     const { status_code: s } = await graph('/' + id, { fields: 'status_code', access_token: token });
     if (s === 'FINISHED') return;
-    if (s === 'ERROR' || s === 'EXPIRED') throw new Error(`Instagram konnte das Bild nicht verarbeiten (${s})`);
+    if (s === 'ERROR' || s === 'EXPIRED') throw new Error(`Instagram konnte die Datei nicht verarbeiten (${s})`);
     await pause(3000);
   }
-  throw new Error('Instagram braucht zu lange für die Bilder – nichts veröffentlicht');
+  throw new Error('Instagram braucht zu lange für die Datei – nichts veröffentlicht');
 }
 
 async function erreichbar(urls) {
@@ -111,23 +115,27 @@ async function main() {
   if (fs.existsSync(path.join(dir, 'gepostet.json'))) throw new Error(`Schon gepostet (${rel}/gepostet.json) – nichts getan.`);
   const post = JSON.parse(fs.readFileSync(path.join(dir, 'post.json'), 'utf8').replace(/^﻿/, ''));
   const bilder = fs.readdirSync(dir).filter(f => /^\d\d\.(jpe?g|png)$/i.test(f)).sort();
-  pruefePost(post, bilder);
+  const video = fs.existsSync(path.join(dir, 'reel.mp4'));
+  pruefePost(post, bilder, video);
   let text = post.text;
   if (text.includes('{{wetter}}')) text = text.replace('{{wetter}}', await wetterVorhersage(post.wetterTage));
   pruefeText(text);
   const token = schluessel();
   const lim = (await graph(`/${IG}/content_publishing_limit`, { fields: 'quota_usage,config', access_token: token })).data[0];
-  console.log(`${rel}: ${bilder.length === 1 ? 'Einzelbild' : bilder.length + ' Bilder (Karussell)'}, ${text.length} Zeichen; `
+  console.log(`${rel}: ${video ? 'Reel (Video)' : bilder.length === 1 ? 'Einzelbild' : bilder.length + ' Bilder (Karussell)'}, ${text.length} Zeichen; `
     + `heute ${lim.quota_usage} von ${lim.config.quota_total} Beiträgen verbraucht`);
   if (schalter === '--probe') { console.log('\n' + text); return; }
 
   committen(rel, `Instagram direkt: ${rel}`);
-  const urls = bilder.map(b => ROH + rel + '/' + b);
+  const urls = (video ? ['reel.mp4'] : bilder).map(b => ROH + rel + '/' + b);
   await erreichbar(urls);
   const tags = n => (post.markierungen || []).filter(m => m.bild === n).map(m => ({ username: m.name, x: m.x ?? 0.5, y: m.y ?? 0.5 }));
   const mitTags = (n, p) => (tags(n).length ? { ...p, user_tags: JSON.stringify(tags(n)) } : p);
   let container;
-  if (urls.length === 1) {
+  if (video) {
+    container = (await graph(`/${IG}/media`, { media_type: 'REELS', video_url: urls[0], caption: text, share_to_feed: 'true', access_token: token }, true)).id;
+    await fertig(container, token, 100);
+  } else if (urls.length === 1) {
     container = (await graph(`/${IG}/media`, mitTags(1, { image_url: urls[0], caption: text, access_token: token }), true)).id;
   } else {
     const kinder = [];

@@ -19,6 +19,12 @@ test('Beitrag braucht JPEG-Bilder 01.jpg … ohne Lücke und gültige Markierung
   assert.throws(() => pruefePost({ text: 'Wetter: {{wetter}}' }, ['01.jpg']), /wetterTage/);
 });
 
+test('Reel: genau ein Video reel.mp4, keine Bilder daneben, keine Markierungen', () => {
+  assert.doesNotThrow(() => pruefePost({ text: 'x' }, [], true));
+  assert.throws(() => pruefePost({ text: 'x' }, ['01.jpg'], true), /Video oder Bilder/);
+  assert.throws(() => pruefePost({ text: 'x', markierungen: [{ bild: 1, name: 'kindo_wien' }] }, [], true), /Markierungen/);
+});
+
 test('Text: kein offener Platzhalter, höchstens 2200 Zeichen und 30 Hashtags', () => {
   assert.throws(() => pruefeText('Hallo {{wetter}}'), /Platzhalter/);
   assert.throws(() => pruefeText('a'.repeat(2201)), /2200/);
