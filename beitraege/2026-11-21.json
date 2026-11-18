@@ -1,0 +1,10 @@
+{
+  "datum": "21. – 22.11.",
+  "tipps": [
+    { "kategorie": "Basteln", "titel": "Poldis Bastelwerkstatt zu Weihnachten", "satz": "Weihnachtlicher Bastelworkshop im Kindermuseum Schloss Schönbrunn.", "wann": "Sa, 10 Uhr", "wo": "Schönbrunn, 13. Bezirk", "alter": "4–12 Jahre", "preis": "6 € pro Werkstück", "veranstalter": "Kindermuseum Schloss Schönbrunn" },
+    { "kategorie": "Theater", "titel": "Praterkasperl: Katzenmusik", "satz": "Kasperl-Puppentheater im Original Wiener Praterkasperl.", "wann": "Sa, 15 & 16 Uhr", "wo": "Prater, 2. Bezirk", "alter": "3–10 Jahre", "preis": "5,90 €", "veranstalter": "Original Wiener Praterkasperl · Prater 80A, 1020 Wien" },
+    { "kategorie": "Kino", "titel": "Bibi Blocksberg im Stadtbox-Kino", "satz": "Kostenloser Kinonachmittag mit Bibi Blocksberg in der Seestadt.", "wann": "Sa, 16 Uhr", "wo": "Seestadt, 22. Bezirk", "alter": "ab 6 Jahren", "preis": "gratis" },
+    { "kategorie": "Museum", "titel": "Das verrückte Labor", "satz": "Experimentier-Workshop im Technischen Museum Wien.", "wann": "So, 14 Uhr", "wo": "Technisches Museum, 14. Bezirk", "alter": "4–7 Jahre", "preis": "je 7,50 €", "veranstalter": "TMW / Technisches Museum Wien · 1140 Wien" },
+    { "kategorie": "Lesen", "titel": "Lesen & Lauschen: Geschichten vom Franz", "satz": "Lesung mit Schauspiel im Vestibül des Burgtheaters.", "wann": "So, 16 Uhr", "wo": "Burgtheater, 1. Bezirk", "alter": "ab 6 Jahren", "preis": "Kinder 6 €", "veranstalter": "Burgtheater – Vestibül" }
+  ]
+}
