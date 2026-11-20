@@ -1,8 +1,8 @@
-# Tipp des Tages – 20.11.
+# Tipp des Tages – 21.11.
 
-![Tipp des Tages: Kinder- und Familienführung im Parlament](2026-11-20/01.png)
+![Tipp des Tages: Das Weihnachtspostamt](2026-11-21/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/340502
+**Link für den Sticker:** https://www.kindo.at/veranstaltungen/1245889
 
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
