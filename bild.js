@@ -39,6 +39,15 @@ function titelfarbe(quelle, art) {
   const woche = Math.floor((Date.parse(d[0]) / 864e5 + 3) / 7); // Wochen seit 1970, ab Montag gezählt
   return TITELFARBEN[(woche * 2 + (art === 'woche' ? 0 : 1)) % TITELFARBEN.length];
 }
+// Grundfarbe für Beiträge aus der Werkstatt (Di–Do, Sa, So; Datum 'JJJJ-MM-TT'): nie die Farbe der Wochen- oder
+// Wochenend-Tipps dieser Woche und nie die vom nächsten Montag, Nachbartage unterscheiden sich immer.
+// Sonst standen im Profil drei rote Beiträge nebeneinander (Clemens, 20.11.2026).
+function tagesfarbe(datum) {
+  const tage = Math.floor(Date.parse(datum) / 864e5) + 3, woche = Math.floor(tage / 7); // Tag 0 = Montag
+  const belegt = [woche * 2, woche * 2 + 1, woche * 2 + 2].map(i => i % TITELFARBEN.length);
+  const frei = TITELFARBEN.filter((_, i) => !belegt.includes(i));
+  return frei[(tage % 7) % frei.length];
+}
 // Was sich zwischen Wochenend- und Wochen-Beitrag unterscheidet
 const TEXTE = {
   wochenende: { kopf: 'Wochenend-Tipps für Wien', frage: 'Was machen wir am Wochenende?', mehr: 'Noch mehr fürs Wochenende?', merken: 'am Samstag wiederfinden' },
@@ -232,6 +241,6 @@ async function rendern(folien, ordner, hoehe = H) {
 
 // Bausteine für profil.js (Beiträge ohne Termine) und story.js (Tipp des Tages)
 module.exports = { B, H, INK, esc, FARBEN, farbe, logo, pfeil, schlussFolie, ICON_SPEICHERN, ICON_TEILEN, ICON_FOLGEN, rendern,
-  tippKarte, TITELFARBEN, titelschrift };
+  tippKarte, TITELFARBEN, titelschrift, titelfarbe, tagesfarbe };
 
 if (require.main === module) main().catch(e => { console.error(e.message); process.exit(1); });
