@@ -1,0 +1,11 @@
+{
+  "art": "kurse",
+  "datum": "23. – 29.11.",
+  "tipps": [
+    { "start": "2026-11-23", "kategorie": "Sport", "titel": "Zwergerl-Kletterkurs", "satz": "Spielerisch klettern lernen in 5 Einheiten, immer montags.", "wann": "ab Mo 23.11., 14:30 Uhr", "wo": "ÖTK-Kletterhalle, 1. Bezirk", "alter": "4–6 Jahre", "preis": "149 €", "veranstalter": "ÖTK-Kletterhalle" },
+    { "start": "2026-11-24", "kategorie": "Schwimmen", "titel": "Babywasserplausch 1", "satz": "Erster Schwimmkurs für Babys, 10 Einheiten, immer dienstags.", "wann": "ab Di 24.11., 8:30 Uhr", "wo": "Amalienbad, 10. Bezirk", "alter": "für Babys", "preis": "250 €", "veranstalter": "Amalienbad" },
+    { "start": "2026-11-25", "kategorie": "Musik", "titel": "Musikentdecker – Musikkurs", "satz": "Musik mit dem ganzen Körper erleben, 7 Einheiten, immer mittwochs.", "wann": "ab Mi 25.11., 15:30 Uhr", "wo": "Meditationsraum, 22. Bezirk", "alter": "3–6 Jahre", "veranstalter": "Meditationsraum" },
+    { "start": "2026-11-26", "kategorie": "Sport", "titel": "Fußballkurs für die 1.–2. Klasse", "satz": "Spielerisch Fußball lernen in 6 Einheiten, immer donnerstags.", "wann": "ab Do 26.11., 16:30 Uhr", "wo": "aspern Seestadt, 22. Bezirk", "alter": "1.–2. Klasse Volksschule", "veranstalter": "aspern Seestadt" },
+    { "start": "2026-11-28", "kategorie": "Lesen", "titel": "Französisch ohne Vorkenntnisse", "satz": "Französisch für Kinder in der Kleingruppe, 6 Einheiten ab Samstag.", "wann": "ab Sa 28.11., 10:00 Uhr", "wo": "Le Bon Mot, 8. Bezirk", "alter": "6–9 Jahre", "preis": "85 €", "veranstalter": "Le Bon Mot Französischinstitut" }
+  ]
+}
