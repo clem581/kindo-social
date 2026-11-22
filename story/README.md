@@ -1,8 +1,8 @@
-# Tipp des Tages – 22.11.
+# Tipp des Tages – 23.11.
 
-![Tipp des Tages: Rapunzel – Theater für Kinder](2026-11-22/01.png)
+![Tipp des Tages: Schwertkunst und Bogenschießen](2026-11-23/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/678703
+**Link für den Sticker:** https://www.kindo.at/veranstaltungen/265283
 
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
