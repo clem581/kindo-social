@@ -1,0 +1,11 @@
+{
+  "art": "woche",
+  "datum": "24. – 27.11.",
+  "tipps": [
+    { "kategorie": "Basteln", "titel": "Laternen basteln & Umzug", "satz": "Bastelworkshop mit anschließendem Laternenumzug.", "wann": "Di, 14:30 Uhr", "wo": "Hilfswerk, 22. Bezirk", "alter": "4–8 Jahre", "preis": "Kinder 2 €", "veranstalter": "Wiener Hilfswerk - Nachbarschaftszentrum 22" },
+    { "kategorie": "Theater", "titel": "Kreativer Raum am Mittwoch", "satz": "Theater, Bewegung und Geschichten im DAS MARGARETEN.", "wann": "Mi, 16:30 Uhr", "wo": "DAS MARGARETEN, 5. Bezirk", "alter": "3–6 Jahre", "preis": "15 €", "veranstalter": "DAS MARGARETEN", "verifiziert": "Kreativer Raum am Mittwoch" },
+    { "kategorie": "Museum", "titel": "Winzig, aber wow!", "satz": "Kostenloser Mikroskopie-Workshop im TU Transformer am Rennweg.", "wann": "Mi, 16 Uhr", "wo": "TU Transformer, 3. Bezirk", "alter": "8–13 Jahre", "preis": "gratis", "veranstalter": "TU TRANSFORMER" },
+    { "kategorie": "Lesen", "titel": "„Wintermärchen“ mit Birgit Lehner", "satz": "Erzählstunde für Kinder in der Bücherei Wieden.", "wann": "Do, 16 Uhr", "wo": "Bücherei Wieden, 4. Bezirk", "alter": "bis 12 Jahre", "veranstalter": "Büchereien Wien · Bücherei Wieden" },
+    { "kategorie": "Ausflug", "titel": "Kinder- und Familienführung im Parlament", "satz": "Spielerischer Rundgang durch das Parlament für Kinder.", "wann": "Fr, 15:30 Uhr", "wo": "Parlament, 1. Bezirk", "alter": "5–8 Jahre", "preis": "gratis", "veranstalter": "Parlament" }
+  ]
+}
