@@ -1,8 +1,8 @@
-# Tipp des Tages – 24.11.
+# Tipp des Tages – 25.11.
 
-![Tipp des Tages: Kasperl in der BahnhofCity Wien West](2026-11-24/01.png)
+![Tipp des Tages: Kreativer Raum am Mittwoch](2026-11-25/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/299635
+**Link für den Sticker:** https://www.kindo.at/veranstaltungen/1276645
 
 So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
 
