@@ -11,7 +11,7 @@ https://claude.ai/artifact/Ecvhsn4f6gb8cx7UUdaA8v
 
 0. `node termine.js` listet die Wochenend-Termine von kindo.at (ein einziger Abruf).
 1. Eine Datei `beitraege/<Samstag>.json` anlegen:
-   `datum` (z. B. `"31.10. – 1.11."`) und 3–5 `tipps`, je mit `kategorie`, `titel`, `satz`,
+   `datum` (z. B. `"31.10. – 1.11."`) und 3–8 `tipps` (8 Tipps + Titel + Schluss = 10 Bilder, die Grenze von Metricool), je mit `kategorie`, `titel`, `satz`,
    `wann`, `wo`, `alter` und – wenn bekannt – `preis`.
    Kategorien: Basteln, Theater, Draußen, Museum, Feste, Musik, Kino, Sport, Lesen, Ausflug,
    Zaubern – jede hat ihre eigene Farbe (`FARBEN` in `bild.js`; `node --test` prüft, dass sich

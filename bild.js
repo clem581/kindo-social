@@ -8,7 +8,7 @@
 //   "tipps": [ { "kategorie": "Feste", "titel": "Halloween-Fest im Wurstelprater",
 //                "satz": "Ein Satz, was die Kinder dort machen.", "wann": "Sa, 14 Uhr",
 //                "wo": "Prater, 2. Bezirk", "alter": "alle Alter", "preis": "gratis" }, … ] }
-// 3 bis 5 Tipps. "preis" darf fehlen. Kategorien mit eigener Farbe: siehe FARBEN.
+// 3 bis 8 Tipps (8 + Titel + Schluss = 10 Bilder, mehr nimmt Metricool nicht). "preis" darf fehlen. Kategorien mit eigener Farbe: siehe FARBEN.
 // "art": "woche" macht den Montags-Beitrag (Tipps für die Woche), sonst Wochenende.
 // "art": "kurse" macht den Sonntags-Beitrag (Kurse, die nächste Woche anfangen): Datei kurse-<Montag>.json,
 // jeder Tipp hat zusätzlich "start" (JJJJ-MM-TT, Montag bis Sonntag dieser Woche).
@@ -170,7 +170,7 @@ function pruefen(b) {
   if (!b.datum || !Array.isArray(b.tipps)) throw new Error('datum und tipps fehlen');
   b.art = b.art || 'wochenende';
   if (!TEXTE[b.art]) throw new Error(`art muss "wochenende", "woche" oder "kurse" sein, nicht "${b.art}"`);
-  if (b.tipps.length < 3 || b.tipps.length > 5) throw new Error('3 bis 5 Tipps nötig');
+  if (b.tipps.length < 3 || b.tipps.length > 8) throw new Error('3 bis 8 Tipps nötig');
   b.tipps.forEach((t, i) => {
     for (const f of ['kategorie', 'titel', 'satz', 'wann', 'wo', 'alter']) if (!t[f]) throw new Error(`Tipp ${i + 1}: ${f} fehlt`);
   });
