@@ -1,0 +1,10 @@
+{
+  "datum": "28. – 29.11.",
+  "tipps": [
+    { "kategorie": "Feste", "titel": "Das Weihnachtspostamt", "satz": "Mitmach-Aktion in der Stadthalle – 1 € pro Brief geht an Licht ins Dunkel.", "wann": "Sa, 10 Uhr", "wo": "Stadthalle, 15. Bezirk", "alter": "ab 4 Jahren", "preis": "Eintritt frei", "veranstalter": "Wiener Stadthalle, Studio F" },
+    { "kategorie": "Basteln", "titel": "Grelle Socken – Stopfen statt Wegwerfen", "satz": "Offenes Atelier im Wien Museum am Karlsplatz.", "wann": "Sa, 11 Uhr", "wo": "Wien Museum, 4. Bezirk", "alter": "ab 8 Jahren", "preis": "gratis", "veranstalter": "Wien Museum" },
+    { "kategorie": "Theater", "titel": "Praterkasperl: Der Adventkranz", "satz": "Kasperltheater beim Original Wiener Praterkasperl im Prater.", "wann": "Sa, 15 & 16 Uhr", "wo": "Prater, 2. Bezirk", "alter": "3–10 Jahre", "preis": "5,90 €", "veranstalter": "Original Wiener Praterkasperl · Prater 80A, 1020 Wien" },
+    { "kategorie": "Museum", "titel": "Kinderaktionstag im mumok", "satz": "Kinder und Familien entdecken Kunst und werden selbst kreativ.", "wann": "So, ab 10 Uhr", "wo": "mumok, 7. Bezirk", "alter": "alle Alter", "preis": "gratis", "veranstalter": "mumok – Museum moderner Kunst" },
+    { "kategorie": "Draußen", "titel": "Kinder-Adventführung im Tiergarten", "satz": "Kostenlose Themenführung zum Advent für Kinder im Tiergarten Schönbrunn.", "wann": "So, 14:30 Uhr", "wo": "Tiergarten Schönbrunn, 13. Bezirk", "alter": "3–12 Jahre", "preis": "Führung gratis + Eintritt", "veranstalter": "Tiergarten Schönbrunn, Maxingstraße 13b, 1130 Wien" }
+  ]
+}
