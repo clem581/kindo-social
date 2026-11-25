@@ -82,18 +82,22 @@ schreibt vor solche Zeilen ein Kennzeichen:
 Jede verifizierte Veranstaltung kommt so einmal in ein Karussell und einmal als Story.
 Geprüft wird für Karussells in `beitraege/*.json`, für die Story in `story/verlauf.txt`.
 
-## Täglich: Story „Tipp des Tages“
+## Täglich: Story „Tipp für <Wochentag>“ (KT-404)
 
-Eine Veranstaltung des Tages als Story-Bild (1080 × 1920), erzeugt schon am Vorabend um 20 Uhr.
-Clemens postet sie selbst in der Instagram-App – so zählt sie nicht zum Metricool-Kontingent und
-kann einen Link-Sticker bekommen.
+Eine Veranstaltung von morgen als Story-Bild (1080 × 1920), automatisch gepostet gegen 18 Uhr am
+Vortag (Routine „KinDo Story“). Die Story ist 24 Stunden zu sehen – am Vorabend und am Tag selbst –,
+darum steht im Bild der Wochentag, nie „heute“ oder „morgen“. Link-Sticker gehen über die
+Schnittstelle nicht; unten im Bild steht „Zur Veranstaltung: Link in der Bio“. Der Bio-Link
+**kindo.at/story** leitet auf die Veranstaltung in `story/link.txt` weiter, und die wechselt erst,
+wenn die neue Story wirklich online ist.
 
 - `node termine.js morgen` listet die Termine von morgen (ein einziger Abruf).
 - Eine Datei `story/<tag>.json` anlegen: `datum` (`"2026-10-28"`), `tipp` (Felder wie oben) und
-  `link` (die Seite der Veranstaltung auf kindo.at).
-- `node story.js story/<tag>.json` – das Bild landet in `story/<tag>/01.png`, dazu `story/README.md`
-  mit Bild und Link. Ältere Tage werden gelöscht, `story/verlauf.txt` merkt sich, was schon dran war.
-- Am Handy: https://github.com/clem581/kindo-social/tree/main/story – Bild speichern, Link kopieren.
+  `link` (`https://www.kindo.at/veranstaltungen/<Nummer>`).
+- `node story.js story/<tag>.json` – Bild in `story/<tag>/01.png` (+ `01.jpg` für Instagram), dazu
+  `story/README.md`. Ältere Tage werden gelöscht, `story/verlauf.txt` merkt sich, was schon dran war.
+- `node story.js story/<tag>.json --posten` – dasselbe und dann als Story veröffentlichen (Schlüssel
+  wie bei `posten.js`). `story/<tag>/gepostet.json` verhindert doppeltes Posten.
 
 Einmalig nach dem Klonen: `npm ci`.
 

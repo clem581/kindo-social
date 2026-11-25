@@ -153,6 +153,6 @@ async function main() {
   console.log('Gepostet: ' + permalink);
 }
 
-module.exports = { wetterText, pruefePost, pruefeText };
+module.exports = { wetterText, pruefePost, pruefeText, IG, ROH, schluessel, graph, fertig, erreichbar, committen };
 
 if (require.main === module) main().catch(e => { console.error(e.message); process.exit(1); });

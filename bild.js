@@ -215,7 +215,8 @@ async function main() {
 }
 
 // Jede Folie als PNG 01.png, 02.png … in den Ordner; bricht ab, wenn ein Text nicht passt.
-async function rendern(folien, ordner, hoehe = H) {
+// mitJpg: zusätzlich 01.jpg … – die Instagram-Schnittstelle nimmt nur JPEG.
+async function rendern(folien, ordner, hoehe = H, mitJpg = false) {
   fs.rmSync(ordner, { recursive: true, force: true });
   fs.mkdirSync(ordner, { recursive: true });
   // Die Seite muss neben fonts/ liegen, sonst lädt der Browser die Schriften nicht.
@@ -231,6 +232,7 @@ async function rendern(folien, ordner, hoehe = H) {
       if (fehler) throw new Error(`Folie ${i + 1}: Text passt nicht (${fehler}). Titel oder Satz kürzen.`);
       const ziel = path.join(ordner, String(i + 1).padStart(2, '0') + '.png');
       await page.screenshot({ path: ziel });
+      if (mitJpg) await page.screenshot({ path: ziel.replace(/\.png$/, '.jpg'), type: 'jpeg', quality: 92 });
       console.log(ziel);
     }
   } finally {
