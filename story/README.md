@@ -1,11 +1,7 @@
-# Tipp des Tages – 25.11.
+# Tipp für Donnerstag – 26.11.
 
-![Tipp des Tages: Kreativer Raum am Mittwoch](2026-11-25/01.png)
+![Tipp für Donnerstag: Winterfit für Kinder](2026-11-26/01.png)
 
-**Link für den Sticker:** https://www.kindo.at/veranstaltungen/1276645
+**Veranstaltung:** https://www.kindo.at/veranstaltungen/265692
 
-So geht's: Bild antippen und speichern, in Instagram als Story posten, Link-Sticker mit dem Link oben dazugeben.
-
-Nur das Bild (fester Link, öffnet im Browser statt in der GitHub-App): https://raw.githubusercontent.com/clem581/kindo-social/main/story/heute.png
-
-Nur der Sticker-Link (fester Link, zum Kopieren): https://raw.githubusercontent.com/clem581/kindo-social/main/story/link.txt
+Die Story wird am Vortag gegen 18 Uhr automatisch gepostet. Der Bio-Link kindo.at/story führt danach auf diese Veranstaltung.
