@@ -1,7 +1,7 @@
-# Tipp für Donnerstag – 26.11.
+# Tipp für Freitag – 27.11.
 
-![Tipp für Donnerstag: Winterfit für Kinder](2026-11-26/01.png)
+![Tipp für Freitag: Wintermarkt am Riesenradplatz](2026-11-27/01.png)
 
-**Veranstaltung:** https://www.kindo.at/veranstaltungen/265692
+**Veranstaltung:** https://www.kindo.at/veranstaltungen/1152478
 
 Die Story wird am Vortag gegen 18 Uhr automatisch gepostet. Der Bio-Link kindo.at/story führt danach auf diese Veranstaltung.
