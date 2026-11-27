@@ -1,7 +1,15 @@
 // node --test   (prüft die Instagram-Markierungen ohne Abruf)
 const test = require('node:test');
 const assert = require('node:assert');
-const { markierungen, kontenIn } = require('./markieren');
+const { markierungen, alsPosten, kontenIn } = require('./markieren');
+
+test('Markierungen für posten.js: Tipp 1 liegt auf Bild 2 (01.jpg ist das Titelbild)', () => {
+  assert.deepStrictEqual(alsPosten({ 1: [{ username: 'ekiz.wien', x: 0.5, y: 0.5 }], 18: [{ username: 'wienmuseum', x: 0.5, y: 0.5 }] }), [
+    { bild: 2, name: 'ekiz.wien', x: 0.5, y: 0.5 },
+    { bild: 19, name: 'wienmuseum', x: 0.5, y: 0.5 },
+  ]);
+  assert.deepStrictEqual(alsPosten({}), []);
+});
 
 const liste = {
   EKIZ: { instagram: 'ekiz.wien', quelle: 'https://www.ekiz.at', geprueft: '2026-11-02' },

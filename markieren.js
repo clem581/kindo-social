@@ -2,6 +2,7 @@
 // Aufruf: node markieren.js beitraege/<datei>.json
 //   →  JSON: { "carouselTags": { "1": [{ "username", "x", "y" }], … }, "erwaehnungen": ["@name", …], "fehlen": ["Veranstalter", …] }
 //      Position wie media in Metricool: 0 = Titelbild, 1 = Tipp 1 …; "fehlen" = Veranstalter, die noch nicht in der Liste stehen.
+//      Dazu "markierungen": [{ "bild", "name", "x", "y" }] für post.json von posten.js (bild 1 = Titelbild 01.jpg, 2 = Tipp 1 …).
 //         node markieren.js suchen https://www.veranstalter.at
 //   →  die Instagram-Konten, die auf dieser Webseite verlinkt sind (ein Abruf)
 //
@@ -39,6 +40,10 @@ function markierungen(b, liste) {
   return { carouselTags, erwaehnungen, fehlen };
 }
 
+// carouselTags (0 = Titelbild) → Markierungen für posten.js (bild 1 = 01.jpg = Titelbild)
+const alsPosten = carouselTags => Object.entries(carouselTags)
+  .flatMap(([pos, tags]) => tags.map(t => ({ bild: Number(pos) + 1, name: t.username, x: t.x, y: t.y })));
+
 function kontenIn(html) {
   const konten = [];
   for (const m of html.matchAll(/instagram\.com\/([A-Za-z0-9._]{1,30})(?![A-Za-z0-9._])/g)) {
@@ -61,9 +66,10 @@ async function main() {
   const quelle = process.argv[2];
   if (!quelle) throw new Error('Aufruf: node markieren.js beitraege/<datei>.json');
   const liste = lesen(path.join(__dirname, 'instagram.json'));
-  console.log(JSON.stringify(markierungen(lesen(quelle), liste), null, 2));
+  const m = markierungen(lesen(quelle), liste);
+  console.log(JSON.stringify({ ...m, markierungen: alsPosten(m.carouselTags) }, null, 2));
 }
 
-module.exports = { markierungen, kontenIn };
+module.exports = { markierungen, alsPosten, kontenIn };
 
 if (require.main === module) main().catch(e => { console.error(e.message); process.exit(1); });

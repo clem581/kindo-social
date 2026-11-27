@@ -1,7 +1,7 @@
 // Veröffentlicht einen vorbereiteten Beitrag direkt über die Instagram-Schnittstelle (ohne Metricool).
 // Aufruf: node posten.js beitraege/claude/<id>            → postet sofort
 //         node posten.js beitraege/claude/<id> --probe    → prüft Schlüssel, Bilder und Text, postet nichts
-// Ordner: post.json ({ "text", "markierungen": [{ "bild", "name", "x", "y" }], "wetterTage": ["JJJJ-MM-TT", …] })
+// Ordner: post.json ({ "text", "markierungen": [{ "bild", "name", "x", "y" }], "altTexte": ["Bild 1", …], "wetterTage": ["JJJJ-MM-TT", …] })
 // und 01.jpg, 02.jpg … (ein Bild = Einzelbild, mehrere = Karussell; die Schnittstelle nimmt nur JPEG)
 // oder statt der Bilder reel.mp4 (= Reel, z. B. aus werkstatt/reel.js; erscheint auch im Feed).
 // „{{wetter}}“ im Text wird beim Posten durch die aktuelle Vorhersage für Wien ersetzt (Open-Meteo).
@@ -114,7 +114,9 @@ async function main() {
   if (rel.startsWith('..') || !fs.existsSync(path.join(dir, 'post.json'))) throw new Error(`Kein vorbereiteter Beitrag: ${ordner}`);
   if (fs.existsSync(path.join(dir, 'gepostet.json'))) throw new Error(`Schon gepostet (${rel}/gepostet.json) – nichts getan.`);
   const post = JSON.parse(fs.readFileSync(path.join(dir, 'post.json'), 'utf8').replace(/^﻿/, ''));
-  const bilder = fs.readdirSync(dir).filter(f => /^\d\d\.(jpe?g|png)$/i.test(f)).sort();
+  // bild.js legt neben 01.png auch 01.jpg ab – dann zählen nur die JPEGs
+  const alle = fs.readdirSync(dir).filter(f => /^\d\d\.(jpe?g|png)$/i.test(f)).sort();
+  const bilder = alle.some(f => /\.jpe?g$/i.test(f)) ? alle.filter(f => /\.jpe?g$/i.test(f)) : alle;
   const video = fs.existsSync(path.join(dir, 'reel.mp4'));
   pruefePost(post, bilder, video);
   let text = post.text;
@@ -130,7 +132,12 @@ async function main() {
   const urls = (video ? ['reel.mp4'] : bilder).map(b => ROH + rel + '/' + b);
   await erreichbar(urls);
   const tags = n => (post.markierungen || []).filter(m => m.bild === n).map(m => ({ username: m.name, x: m.x ?? 0.5, y: m.y ?? 0.5 }));
-  const mitTags = (n, p) => (tags(n).length ? { ...p, user_tags: JSON.stringify(tags(n)) } : p);
+  // shortcut: ob Instagram alt_text wirklich speichert, war am 27.11.2026 nicht nachprüfbar (wird nicht zurückgemeldet, unbekannte Felder schluckt die Schnittstelle still)
+  const mitTags = (n, p) => {
+    const alt = (post.altTexte || [])[n - 1];
+    const q = alt ? { ...p, alt_text: alt } : p;
+    return tags(n).length ? { ...q, user_tags: JSON.stringify(tags(n)) } : q;
+  };
   let container;
   if (video) {
     container = (await graph(`/${IG}/media`, { media_type: 'REELS', video_url: urls[0], caption: text, share_to_feed: 'true', access_token: token }, true)).id;

@@ -1,7 +1,7 @@
 # KinDo – Bilder für Social Media
 
 Hier liegen die Bilder der wöchentlichen Instagram-Beiträge von [@kindo_wien](https://www.instagram.com/kindo_wien/).
-Das Repo ist öffentlich, damit Metricool die Bilder über ihre Adresse abholen kann.
+Das Repo ist öffentlich, damit Instagram die Bilder über ihre Adresse abholen kann.
 Hier liegt nichts, was nicht ohnehin auf Instagram erscheint.
 
 Das Aussehen folgt dem Artefakt „KinDo Instagram-Konzept“ (Vorlagen „Feed · Karussell 1–3“):
@@ -11,18 +11,32 @@ https://claude.ai/artifact/Ecvhsn4f6gb8cx7UUdaA8v
 
 0. `node termine.js` listet die Wochenend-Termine von kindo.at (ein einziger Abruf).
 1. Eine Datei `beitraege/<Samstag>.json` anlegen:
-   `datum` (z. B. `"31.10. – 1.11."`) und 3–8 `tipps` (8 Tipps + Titel + Schluss = 10 Bilder, die Grenze von Metricool), je mit `kategorie`, `titel`, `satz`,
+   `datum` (z. B. `"31.10. – 1.11."`) und 3–18 `tipps` (18 Tipps + Titel + Schluss = 20 Bilder, die Grenze von Instagram), je mit `kategorie`, `titel`, `satz`,
    `wann`, `wo`, `alter` und – wenn bekannt – `preis`.
    Kategorien: Basteln, Theater, Draußen, Museum, Feste, Musik, Kino, Sport, Lesen, Ausflug,
    Zaubern – jede hat ihre eigene Farbe (`FARBEN` in `bild.js`; `node --test` prüft, dass sich
    keine zwei Kategorien eine Farbe teilen).
 2. `node bild.js beitraege/<Samstag>.json` – die Bilder landen im Ordner `beitraege/<Samstag>/`
-   (1080 × 1350): `01.png` Titel, je ein Bild pro Tipp, zuletzt das Schlussbild.
-3. Committen und pushen. Die öffentlichen Adressen sind dann
-   `https://raw.githubusercontent.com/clem581/kindo-social/main/beitraege/<Samstag>/01.png` usw.
-   Alle zusammen, in dieser Reihenfolge, ergeben in Metricool das Karussell.
+   (1080 × 1350): `01.png` Titel, je ein Bild pro Tipp, zuletzt das Schlussbild – jedes zusätzlich
+   als `01.jpg` …, denn die Instagram-Schnittstelle nimmt nur JPEG.
+3. Committen und pushen, dann `beitraege/<Samstag>/post.json` anlegen und mit `posten.js` posten
+   (siehe unten).
 
 Passt ein Text nicht aufs Bild, bricht `bild.js` mit einer Meldung ab.
+
+## Posten mit posten.js
+
+Seit 27.11.2026 posten alle drei Routinen direkt über die Instagram-Schnittstelle statt über
+Metricool – Metricool nimmt nur 10 Bilder je Karussell, Instagram 20. Die Routinen laufen deshalb
+am Tag der Veröffentlichung gegen 7:30 Uhr (Fr Wochenende, So Kurse, Mo Woche) und posten am Ende
+sofort; der Computer muss dafür laufen.
+
+- `post.json` im Bilder-Ordner: `{ "text": "…", "markierungen": [{ "bild": 2, "name": "…", "x": 0.5, "y": 0.5 }], "altTexte": ["…", …] }`
+  (`bild` 1 = Titelbild; die Markierungen liefert `markieren.js` fertig). Text höchstens 2200 Zeichen.
+- `node posten.js beitraege/<ordner> --probe` prüft Schlüssel, Bilder und Text, postet nichts.
+- `node posten.js beitraege/<ordner>` committet und pusht den Ordner, postet und schreibt
+  `gepostet.json` (mit Link) – liegt die schon da, postet es nie ein zweites Mal.
+- Schlüssel: `META_POST_TOKEN` in `~/.config/kindo-meta/.env`, nie ins Repo.
 
 ## Angepinnte Profil-Beiträge
 
@@ -42,7 +56,7 @@ Gleich wie oben, mit drei Unterschieden:
 
 ## Sonntags: Kurse, die nächste Woche starten
 
-Samstags erzeugt, Sonntag 8 Uhr veröffentlicht. Das Titelbild ist absichtlich anders als bei den
+Sonntag früh erzeugt und gleich gepostet. Das Titelbild ist absichtlich anders als bei den
 Veranstaltungen: immer dunkel mit Heftkaros und einem Stundenplan Mo–So – so erkennt man die
 Kurs-Beiträge im Feed sofort.
 
@@ -59,7 +73,8 @@ Alle drei Karussells markieren die Veranstalter auf ihrem Bild und nennen sie mi
 aber nur, wenn ihr Instagram-Name in `instagram.json` steht. Geraten wird nie.
 
 - Jeder Tipp kann `veranstalter` haben (Name des Veranstalters oder Orts, z. B. `"EKIZ"`).
-- `node markieren.js beitraege/<datei>.json` gibt die Markierungen für Metricool (`carouselTags`), die
+- `node markieren.js beitraege/<datei>.json` gibt die Markierungen für `post.json` (`markierungen`;
+  `carouselTags` ist das alte Metricool-Format), die
   @Namen für den Text und die Veranstalter, die noch nicht in der Liste stehen.
 - `node markieren.js suchen https://<webseite des veranstalters>` zeigt die Instagram-Konten, die auf
   dessen eigener Webseite verlinkt sind. Nur so ein Konto kommt in die Liste:

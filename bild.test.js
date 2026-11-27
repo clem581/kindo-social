@@ -1,7 +1,17 @@
 // node --test   (prüft die Kategorie-Farben, ohne Bilder zu erzeugen)
 const test = require('node:test');
 const assert = require('node:assert');
-const { FARBEN, titelfarbe, tagesfarbe } = require('./bild');
+const { FARBEN, titelfarbe, tagesfarbe, pruefen, MAX_TIPPS } = require('./bild');
+
+test('Karussell: 3 bis 18 Tipps – mit Titel und Schluss höchstens 20 Bilder, die Grenze von Instagram', () => {
+  const tipp = { kategorie: 'Basteln', titel: 'T', satz: 'S', wann: 'Sa, 10 Uhr', wo: 'Wien', alter: 'alle Alter' };
+  const mit = n => ({ datum: '5. – 6.12.', tipps: Array(n).fill(tipp) });
+  assert.strictEqual(MAX_TIPPS + 2, 20);
+  assert.doesNotThrow(() => pruefen(mit(18)));
+  assert.doesNotThrow(() => pruefen(mit(3)));
+  assert.throws(() => pruefen(mit(19)), /3 bis 18/);
+  assert.throws(() => pruefen(mit(2)), /3 bis 18/);
+});
 
 test('Werkstatt-Farbe: nie wie Wochen-/Wochenend-Tipps, nie zwei gleiche Tage hintereinander', () => {
   const tag = i => new Date(Date.parse('2026-11-16') + i * 864e5).toISOString().slice(0, 10); // ab Mo 16.11.
